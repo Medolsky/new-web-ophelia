@@ -26,6 +26,29 @@ function saveFallbackDb(db) {
     }
 }
 
+function getRequestId(req) {
+    if (req.query && req.query.id && req.query.id !== '[id]' && req.query.id !== '[id].js') {
+        return String(req.query.id).trim();
+    }
+    if (req.body && req.body.id) {
+        return String(req.body.id).trim();
+    }
+    if (req.url) {
+        const urlPart = req.url.split('?')[0];
+        const segments = urlPart.split('/').filter(Boolean);
+        const last = segments[segments.length - 1];
+        if (last && last !== 'posters' && last !== '[id]' && last !== '[id].js' && !last.endsWith('.js')) {
+            return decodeURIComponent(last).trim();
+        }
+        if (req.url.includes('?')) {
+            const queryParams = new URLSearchParams(req.url.split('?')[1]);
+            const qId = queryParams.get('id');
+            if (qId && qId !== '[id]' && qId !== '[id].js') return qId.trim();
+        }
+    }
+    return null;
+}
+
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -35,14 +58,34 @@ module.exports = async (req, res) => {
         return res.status(200).end();
     }
 
-    // Determine ID from URL query (/api/posters?id=xxx or /api/posters/[id])
-    const id = req.query && req.query.id ? req.query.id : null;
+    const id = getRequestId(req);
 
     // ---------------- GET (All or Single) ----------------
     if (req.method === 'GET') {
         try {
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+
             if (isConfigured) {
-                await seedInitialData();
+                if (id) {
+                    const { data: single, error: sErr } = await supabase
+                        .from('posters')
+                        .select('*')
+                        .eq('id', id)
+                        .maybeSingle();
+
+                    if (sErr) throw sErr;
+                    if (!single) return res.status(404).json({ success: false, message: 'Poster tidak ditemukan.' });
+
+                    return res.status(200).json({
+                        id: single.id,
+                        title: single.title,
+                        description: single.description || '',
+                        category: single.category || 'EVENT',
+                        imageUrl: single.image_url || 'asset/img/logo-3d.png',
+                        createdAt: single.created_at
+                    });
+                }
+
                 const { data, error } = await supabase
                     .from('posters')
                     .select('*')
@@ -50,7 +93,6 @@ module.exports = async (req, res) => {
 
                 if (error) throw error;
 
-                // Map Supabase column names to frontend camelCase
                 const posters = (data || []).map(p => ({
                     id: p.id,
                     title: p.title,
@@ -60,11 +102,9 @@ module.exports = async (req, res) => {
                     createdAt: p.created_at
                 }));
 
-                res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=30');
                 return res.status(200).json(posters);
             }
 
-            // Fallback to local / memory db
             const db = getFallbackDb();
             const posters = [...(db.posters || [])].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             return res.status(200).json(posters);
@@ -83,7 +123,6 @@ module.exports = async (req, res) => {
     // ---------------- POST (Create) ----------------
     if (req.method === 'POST') {
         try {
-            // Parse multipart body if sent via FormData
             if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
                 await parseMultipart(req, res, 'image');
             }
@@ -95,12 +134,10 @@ module.exports = async (req, res) => {
 
             let imageUrl = 'asset/img/logo-3d.png';
 
-            // Handle image upload
             if (req.file) {
                 if (isConfigured) {
                     imageUrl = await uploadImage(req.file.buffer, req.file.originalname, req.file.mimetype, 'posters');
                 } else {
-                    // In-memory base64 fallback when cloud storage is not connected
                     const b64 = req.file.buffer.toString('base64');
                     imageUrl = `data:${req.file.mimetype || 'image/jpeg'};base64,${b64}`;
                 }
@@ -160,17 +197,16 @@ module.exports = async (req, res) => {
                     .from('posters')
                     .select('*')
                     .eq('id', targetId)
-                    .single();
+                    .maybeSingle();
 
-                if (fetchErr || !existing) {
-                    return res.status(404).json({ success: false, message: 'Poster tidak ditemukan di database.' });
+                if (fetchErr) throw fetchErr;
+                if (!existing) {
+                    return res.status(404).json({ success: false, message: `Poster dengan ID "${targetId}" tidak ditemukan di database.` });
                 }
 
                 let imageUrl = existing.image_url;
                 if (req.file) {
-                    // Upload new image to Supabase Storage
                     imageUrl = await uploadImage(req.file.buffer, req.file.originalname, req.file.mimetype, 'posters');
-                    // Clean up old image if stored in Supabase
                     if (existing.image_url && existing.image_url !== imageUrl) {
                         await deleteImage(existing.image_url);
                     }
@@ -204,7 +240,6 @@ module.exports = async (req, res) => {
                     }
                 });
             } else {
-                // Local / memory fallback
                 const db = getFallbackDb();
                 const index = (db.posters || []).findIndex(p => p.id === targetId);
                 if (index === -1) {
@@ -245,18 +280,23 @@ module.exports = async (req, res) => {
             }
 
             if (isConfigured) {
-                const { data: existing } = await supabase
+                const { data: existing, error: findErr } = await supabase
                     .from('posters')
-                    .select('image_url')
+                    .select('id, image_url')
                     .eq('id', targetId)
-                    .single();
+                    .maybeSingle();
 
-                if (existing && existing.image_url) {
+                if (findErr) throw findErr;
+                if (!existing) {
+                    return res.status(404).json({ success: false, message: `Poster dengan ID "${targetId}" tidak ditemukan di database.` });
+                }
+
+                if (existing.image_url) {
                     await deleteImage(existing.image_url);
                 }
 
-                const { error } = await supabase.from('posters').delete().eq('id', targetId);
-                if (error) throw error;
+                const { error: delErr } = await supabase.from('posters').delete().eq('id', targetId);
+                if (delErr) throw delErr;
 
                 return res.status(200).json({ success: true, message: 'Poster berhasil dihapus.' });
             } else {

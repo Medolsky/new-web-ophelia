@@ -26,6 +26,29 @@ function saveFallbackDb(db) {
     }
 }
 
+function getRequestId(req) {
+    if (req.query && req.query.id && req.query.id !== '[id]' && req.query.id !== '[id].js') {
+        return String(req.query.id).trim();
+    }
+    if (req.body && req.body.id) {
+        return String(req.body.id).trim();
+    }
+    if (req.url) {
+        const urlPart = req.url.split('?')[0];
+        const segments = urlPart.split('/').filter(Boolean);
+        const last = segments[segments.length - 1];
+        if (last && last !== 'articles' && last !== '[id]' && last !== '[id].js' && !last.endsWith('.js')) {
+            return decodeURIComponent(last).trim();
+        }
+        if (req.url.includes('?')) {
+            const queryParams = new URLSearchParams(req.url.split('?')[1]);
+            const qId = queryParams.get('id');
+            if (qId && qId !== '[id]' && qId !== '[id].js') return qId.trim();
+        }
+    }
+    return null;
+}
+
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -35,13 +58,37 @@ module.exports = async (req, res) => {
         return res.status(200).end();
     }
 
-    const id = req.query && req.query.id ? req.query.id : null;
+    const id = getRequestId(req);
 
     // ---------------- GET (All or Single) ----------------
     if (req.method === 'GET') {
         try {
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+
             if (isConfigured) {
-                await seedInitialData();
+                if (id) {
+                    const { data: single, error: sErr } = await supabase
+                        .from('articles')
+                        .select('*')
+                        .eq('id', id)
+                        .maybeSingle();
+
+                    if (sErr) throw sErr;
+                    if (!single) return res.status(404).json({ success: false, message: 'Artikel tidak ditemukan.' });
+
+                    return res.status(200).json({
+                        id: single.id,
+                        title: single.title,
+                        category: single.category || 'UPDATE',
+                        author: single.author || 'Admin Ophelia',
+                        readTime: single.read_time || '3 MIN',
+                        excerpt: single.excerpt || '',
+                        content: single.content || '',
+                        coverUrl: single.cover_url || 'asset/img/logo-kota.png',
+                        createdAt: single.created_at
+                    });
+                }
+
                 const { data, error } = await supabase
                     .from('articles')
                     .select('*')
@@ -61,7 +108,6 @@ module.exports = async (req, res) => {
                     createdAt: a.created_at
                 }));
 
-                res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=30');
                 return res.status(200).json(articles);
             }
 
@@ -105,7 +151,6 @@ module.exports = async (req, res) => {
                 coverUrl = directCoverUrl.trim();
             }
 
-            // Estimate reading time (~200 words per minute)
             const wordCount = (content || '').trim().split(/\s+/).filter(Boolean).length;
             const readTime = Math.max(1, Math.ceil(wordCount / 200)) + ' MIN';
 
@@ -167,10 +212,11 @@ module.exports = async (req, res) => {
                     .from('articles')
                     .select('*')
                     .eq('id', targetId)
-                    .single();
+                    .maybeSingle();
 
-                if (fetchErr || !existing) {
-                    return res.status(404).json({ success: false, message: 'Artikel tidak ditemukan di database.' });
+                if (fetchErr) throw fetchErr;
+                if (!existing) {
+                    return res.status(404).json({ success: false, message: `Artikel dengan ID "${targetId}" tidak ditemukan di database.` });
                 }
 
                 let coverUrl = existing.cover_url;
@@ -266,18 +312,23 @@ module.exports = async (req, res) => {
             }
 
             if (isConfigured) {
-                const { data: existing } = await supabase
+                const { data: existing, error: findErr } = await supabase
                     .from('articles')
-                    .select('cover_url')
+                    .select('id, cover_url')
                     .eq('id', targetId)
-                    .single();
+                    .maybeSingle();
 
-                if (existing && existing.cover_url) {
+                if (findErr) throw findErr;
+                if (!existing) {
+                    return res.status(404).json({ success: false, message: `Artikel dengan ID "${targetId}" tidak ditemukan di database.` });
+                }
+
+                if (existing.cover_url) {
                     await deleteImage(existing.cover_url);
                 }
 
-                const { error } = await supabase.from('articles').delete().eq('id', targetId);
-                if (error) throw error;
+                const { error: delErr } = await supabase.from('articles').delete().eq('id', targetId);
+                if (delErr) throw delErr;
 
                 return res.status(200).json({ success: true, message: 'Artikel berhasil dihapus.' });
             } else {

@@ -73,52 +73,9 @@ async function deleteImage(imageUrl) {
 /**
  * Seed initial data if tables are empty
  */
-let hasSeeded = false;
 async function seedInitialData() {
-    if (!supabase || hasSeeded) return;
-    try {
-        hasSeeded = true;
-        // Check posters
-        const { count: posterCount, error: pErr } = await supabase
-            .from('posters')
-            .select('*', { count: 'exact', head: true });
-
-        if (!pErr && posterCount === 0 && Array.isArray(defaultDb.posters) && defaultDb.posters.length > 0) {
-            const formattedPosters = defaultDb.posters.map(p => ({
-                id: p.id,
-                title: p.title,
-                description: p.description || '',
-                category: p.category || 'EVENT',
-                image_url: p.imageUrl || 'asset/img/logo-3d.png',
-                created_at: p.createdAt || new Date().toISOString()
-            }));
-            await supabase.from('posters').insert(formattedPosters);
-            console.log('[Supabase] Initial posters seeded successfully.');
-        }
-
-        // Check articles
-        const { count: articleCount, error: aErr } = await supabase
-            .from('articles')
-            .select('*', { count: 'exact', head: true });
-
-        if (!aErr && articleCount === 0 && Array.isArray(defaultDb.articles) && defaultDb.articles.length > 0) {
-            const formattedArticles = defaultDb.articles.map(a => ({
-                id: a.id,
-                title: a.title,
-                category: a.category || 'UPDATE',
-                author: a.author || 'Admin Ophelia',
-                read_time: a.readTime || '3 MIN',
-                excerpt: a.excerpt || '',
-                content: a.content || '',
-                cover_url: a.coverUrl || 'asset/img/logo-kota.png',
-                created_at: a.createdAt || new Date().toISOString()
-            }));
-            await supabase.from('articles').insert(formattedArticles);
-            console.log('[Supabase] Initial articles seeded successfully.');
-        }
-    } catch (e) {
-        console.warn('[Supabase] Seeding warning:', e.message);
-    }
+    // No-op: Data is managed directly in Supabase or seeded once via SQL script
+    return;
 }
 
 module.exports = {

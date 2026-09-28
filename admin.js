@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchStats() {
         try {
             const [statsRes, cfxRes] = await Promise.all([
-                fetch('/api/stats').then(r => r.json()).catch(() => ({})),
+                fetch(`/api/stats?_t=${Date.now()}`, { cache: 'no-store' }).then(r => r.json()).catch(() => ({})),
                 fetch('/api/server-status').then(r => r.json()).catch(() => ({}))
             ]);
 
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     async function fetchPosters() {
         try {
-            const res = await fetch('/api/posters');
+            const res = await fetch(`/api/posters?_t=${Date.now()}`, { cache: 'no-store' });
             postersData = await res.json();
             renderPostersTable();
         } catch (err) {
@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     async function fetchArticles() {
         try {
-            const res = await fetch('/api/articles');
+            const res = await fetch(`/api/articles?_t=${Date.now()}`, { cache: 'no-store' });
             articlesData = await res.json();
             renderArticlesTable();
         } catch (err) {
