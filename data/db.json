@@ -1,4 +1,60 @@
 {
-  "posters": [],
-  "articles": []
+  "posters": [
+    {
+      "id": "poster_1",
+      "title": "Grand Launching Ophelia City",
+      "description": "Poster resmi peresmian kota Ophelia Roleplay dengan sistem custom dan ekonomi stabil.",
+      "imageUrl": "asset/img/logo-3d.png",
+      "category": "EVENT",
+      "createdAt": "2026-09-25T10:00:00.000Z"
+    },
+    {
+      "id": "poster_2",
+      "title": "Open Recruitment: Polisi & EMS",
+      "description": "Pendaftaran terbuka instansi kepolisian dan medis kota Ophelia Roleplay.",
+      "imageUrl": "asset/img/logo-kota.png",
+      "category": "RECRUITMENT",
+      "createdAt": "2026-09-26T12:00:00.000Z"
+    },
+    {
+      "id": "poster_3",
+      "title": "Car Meet & Drift Championship",
+      "description": "Kompetisi modifikasi mobil dan adu kecepatan di Los Santos Airport.",
+      "imageUrl": "asset/img/logo-3d.png",
+      "category": "COMMUNITY",
+      "createdAt": "2026-09-27T15:30:00.000Z"
+    }
+  ],
+  "articles": [
+    {
+      "id": "article_1",
+      "title": "Pembaruan Fitur Framework v2.4 & Optimalisasi FPS Kota",
+      "category": "PATCH NOTES",
+      "author": "Developer Team",
+      "coverUrl": "asset/img/logo-3d.png",
+      "excerpt": "Simak rangkuman pembaharuan script custom pekerjaan, optimalisasi handling mobil, dan peningkatan kestabilan server.",
+      "content": "Warga Ophelia Roleplay yang terhormat,\n\nKami dengan bangga merilis pembaruan v2.4 yang difokuskan pada peningkatan performa dan kenyamanan bermain:\n\n1. Optimalisasi Script Core: Pengurangan lag spike dan latensi FiveM hingga 35%.\n2. Modifikasi Kendaraan: Penyeimbangan handling mobil sport, SUV dinas kepolisian, dan ambulans.\n3. Fitur Pekerjaan Baru: Penambahan variasi pekerjaan legal dan perluasan interaksi pedagang pasar.\n4. Sistem Keamanan Kota: Pengetatan integrasi Anti-Cheat dan proteksi cyber kota.\n\nSelamat menikmati petualangan roleplay yang lebih imersif dan kompetitif di Ophelia!",
+      "createdAt": "2026-09-25T10:00:00.000Z"
+    },
+    {
+      "id": "article_2",
+      "title": "Panduan Menjadi Warga Baru & Aturan Roleplay Ophelia",
+      "category": "GUIDE",
+      "author": "Head Admin",
+      "coverUrl": "asset/img/logo-kota.png",
+      "excerpt": "Panduan lengkap seputar etika roleplay, istilah penting (FailRP, VDM, RDM), dan tata tertib hidup di kota Ophelia.",
+      "content": "Bagi seluruh pendatang baru di Ophelia Roleplay, perhatikan prinsip utama dalam menjaga kualitas cerita roleplay bersama:\n\n- Hormati Value of Life: Selalu hargai nyawa karakter Anda dalam setiap skenario kejahatan maupun kecelakaan.\n- No Random Death Match (RDM) & Vehicle Death Match (VDM): Dilarang melukai atau menabrak warga tanpa latar belakang roleplay yang jelas.\n- Menghormati Instansi: Hormati petugas kepolisian dan paramedis saat bertugas di TKP.\n\nCiptakan jalan cerita yang unik dan bangun reputasi karaktermu bersama komunitas kami!",
+      "createdAt": "2026-09-26T12:00:00.000Z"
+    },
+    {
+      "id": "article_3",
+      "title": "Event Komunitas: Turnamen Underground & Pasar Malam",
+      "category": "EVENT",
+      "author": "Kreatif Team",
+      "coverUrl": "asset/img/logo-3d.png",
+      "excerpt": "Bersiaplah untuk festival akhir pekan dengan hadiah ratusan juta rupiah uang in-game dan gelar juara kota.",
+      "content": "Malam minggu ini Ophelia akan menggelar rangkaian event meriah:\n\n- Drag Race Championship di runway Sandy Shores.\n- Bazar Pedagang Kaki Lima di pusat kota dengan diskon makanan & merchandise khusus.\n- Konser musik live di Diamond Casino Roof.\n\nPastikan Anda mendaftarkan tim dan kendaraan terbaik Anda melalui Discord resmi Ophelia Roleplay!",
+      "createdAt": "2026-09-27T15:30:00.000Z"
+    }
+  ]
 }

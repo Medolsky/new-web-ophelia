@@ -1,3 +1,4 @@
+const defaultDb = require('../data/db.json');
 const path = require('path');
 const fs = require('fs');
 
@@ -10,21 +11,21 @@ module.exports = (req, res) => {
     }
 
     try {
-        let db = { posters: [], articles: [] };
+        let db = defaultDb;
         const tmpDbPath = '/tmp/data/db.json';
-        const localDbPath = path.join(process.cwd(), 'data', 'db.json');
-
         if (fs.existsSync(tmpDbPath)) {
-            db = JSON.parse(fs.readFileSync(tmpDbPath, 'utf-8'));
-        } else if (fs.existsSync(localDbPath)) {
-            db = JSON.parse(fs.readFileSync(localDbPath, 'utf-8'));
+            try {
+                db = JSON.parse(fs.readFileSync(tmpDbPath, 'utf-8'));
+            } catch (e) {}
         }
-
         res.status(200).json({
             postersCount: (db.posters || []).length,
             articlesCount: (db.articles || []).length
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(200).json({
+            postersCount: (defaultDb.posters || []).length,
+            articlesCount: (defaultDb.articles || []).length
+        });
     }
 };
