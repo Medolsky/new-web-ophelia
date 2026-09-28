@@ -19,7 +19,7 @@
     "url": "https://github.com/Medolsky/ophelia-website/issues"
   },
   "homepage": "https://github.com/Medolsky/ophelia-website#readme",
-  "dependencies": {
+  "devDependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "multer": "^2.4.0"
