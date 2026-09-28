@@ -9,12 +9,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Setup Directories
-const UPLOADS_DIR = path.join(__dirname, 'uploads');
-const DATA_DIR = path.join(__dirname, 'data');
+const isServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+const UPLOADS_DIR = isServerless ? path.join('/tmp', 'uploads') : path.join(__dirname, 'uploads');
+const DATA_DIR = isServerless ? path.join('/tmp', 'data') : path.join(__dirname, 'data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
+const BUNDLED_DB_FILE = path.join(__dirname, 'data', 'db.json');
 
-if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+try {
+    if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+} catch (e) {
+    console.warn('[Storage] Warning initializing directories:', e.message);
+}
 
 // Admin Credentials
 const ADMIN_USERNAME = process.env.ADMIN_USER || 'admin';
@@ -23,7 +29,15 @@ const ACTIVE_TOKENS = new Set();
 
 // Seed initial database if empty
 function initializeDB() {
-    if (!fs.existsSync(DB_FILE)) {
+    try {
+        if (!fs.existsSync(DB_FILE)) {
+            if (fs.existsSync(BUNDLED_DB_FILE)) {
+                try {
+                    const seed = fs.readFileSync(BUNDLED_DB_FILE, 'utf-8');
+                    fs.writeFileSync(DB_FILE, seed, 'utf-8');
+                    return;
+                } catch (e) {}
+            }
         const seedData = {
             posters: [
                 {
@@ -84,8 +98,15 @@ function initializeDB() {
                 }
             ]
         };
-        fs.writeFileSync(DB_FILE, JSON.stringify(seedData, null, 2), 'utf-8');
+        try {
+            fs.writeFileSync(DB_FILE, JSON.stringify(seedData, null, 2), 'utf-8');
+        } catch (e) {
+            console.warn('[Storage] Could not write initial seed:', e.message);
+        }
     }
+} catch (e) {
+    console.warn('[Storage] initializeDB warning:', e.message);
+}
 }
 
 initializeDB();
@@ -94,6 +115,10 @@ function readDB() {
     try {
         if (fs.existsSync(DB_FILE)) {
             const raw = fs.readFileSync(DB_FILE, 'utf-8');
+            return JSON.parse(raw);
+        }
+        if (fs.existsSync(BUNDLED_DB_FILE)) {
+            const raw = fs.readFileSync(BUNDLED_DB_FILE, 'utf-8');
             return JSON.parse(raw);
         }
     } catch (e) {
@@ -522,16 +547,21 @@ app.delete('/api/articles/:id', requireAuth, (req, res) => {
     }
 });
 
-// Fallback to index.html for client routes
-app.use((req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+// Start Server locally or export for serverless
+if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    // Fallback to index.html for client routes in local server mode
+    app.use((req, res) => {
+        res.sendFile(path.join(__dirname, 'index.html'));
+    });
 
-// Start Server (only listen when not running in serverless environment like Vercel)
-if (!process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`[OPHELIA SERVER] Running at http://localhost:${PORT}`);
         console.log(`[OPHELIA SERVER] Admin Panel available at http://localhost:${PORT}/admin.html`);
+    });
+} else {
+    // In serverless, non-matching API routes return JSON 404
+    app.use('/api', (req, res) => {
+        res.status(404).json({ error: 'Endpoint not found' });
     });
 }
 
