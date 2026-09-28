@@ -2477,3 +2477,74 @@ body:hover #cursor-glow {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+
+/* Leadership High Command Grid (Owner & Head Admin Top Spotlight) */
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto 36px;
+}
+
+.leadership-grid .owner-spotlight {
+    margin: 0;
+    max-width: 100%;
+    padding: 32px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.leadership-grid .owner-spotlight-inner {
+    gap: 24px;
+}
+
+.leadership-grid .owner-avatar-wrapper {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.leadership-grid .owner-title {
+    font-size: clamp(24px, 2.5vw, 32px);
+    margin-bottom: 8px;
+}
+
+.leadership-grid .owner-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.badge-headadmin {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(220, 38, 38, 0.22);
+    color: #FCA5A5;
+    border: 1px solid rgba(220, 38, 38, 0.45);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    box-shadow: 0 0 14px rgba(220, 38, 38, 0.25);
+}
+
+.headadmin-spotlight {
+    border-color: rgba(220, 38, 38, 0.35);
+}
+
+.headadmin-spotlight:hover {
+    border-color: rgba(248, 113, 113, 0.6);
+}
+
+@media (max-width: 960px) {
+    .leadership-grid {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+    }
+}
