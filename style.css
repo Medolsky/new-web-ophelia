@@ -1773,6 +1773,12 @@ body:hover #cursor-glow {
     color: #FBBF24;
 }
 
+.dept-icon-box.faction-resto {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.35);
+    color: #F5D061;
+}
+
 .dept-icon-box.faction-ems {
     background: rgba(239, 68, 68, 0.15);
     border-color: rgba(239, 68, 68, 0.35);
@@ -1799,6 +1805,10 @@ body:hover #cursor-glow {
 
 .dept-category-tag.tag-mechanic {
     color: #FBBF24;
+}
+
+.dept-category-tag.tag-resto {
+    color: #F5D061;
 }
 
 .dept-category-tag.tag-ems {

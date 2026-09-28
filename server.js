@@ -92,15 +92,22 @@ initializeDB();
 
 function readDB() {
     try {
-        const raw = fs.readFileSync(DB_FILE, 'utf-8');
-        return JSON.parse(raw);
+        if (fs.existsSync(DB_FILE)) {
+            const raw = fs.readFileSync(DB_FILE, 'utf-8');
+            return JSON.parse(raw);
+        }
     } catch (e) {
-        return { posters: [], articles: [] };
+        console.warn('DB read error:', e.message);
     }
+    return { posters: [], articles: [] };
 }
 
 function writeDB(data) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (e) {
+        console.warn('DB write warning (ephemeral/read-only):', e.message);
+    }
 }
 
 // Multer Storage Configuration
@@ -520,8 +527,12 @@ app.use((req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`[OPHELIA SERVER] Running at http://localhost:${PORT}`);
-    console.log(`[OPHELIA SERVER] Admin Panel available at http://localhost:${PORT}/admin.html`);
-});
+// Start Server (only listen when not running in serverless environment like Vercel)
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`[OPHELIA SERVER] Running at http://localhost:${PORT}`);
+        console.log(`[OPHELIA SERVER] Admin Panel available at http://localhost:${PORT}/admin.html`);
+    });
+}
+
+module.exports = app;
