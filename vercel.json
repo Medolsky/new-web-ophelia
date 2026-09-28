@@ -1,4 +1,14 @@
 {
   "framework": null,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/posters/:id",
+      "destination": "/api/posters/[id].js"
+    },
+    {
+      "source": "/api/articles/:id",
+      "destination": "/api/articles/[id].js"
+    }
+  ]
 }

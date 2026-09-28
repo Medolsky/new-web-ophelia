@@ -21,7 +21,10 @@
   "homepage": "https://github.com/Medolsky/ophelia-website#readme",
   "devDependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "express": "^5.2.1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.2",
     "multer": "^2.4.0"
   }
 }

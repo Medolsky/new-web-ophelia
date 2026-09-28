@@ -274,6 +274,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const adminServerStatus = document.getElementById('admin-server-status');
+    const adminDbStatus = document.getElementById('admin-db-status');
+
+    function compressImage(file, maxWidth = 1920, maxHeight = 1080, quality = 0.85) {
+        return new Promise((resolve) => {
+            if (!file || !file.type.startsWith('image/')) return resolve(file);
+            if (file.size < 1024 * 1024) return resolve(file); // Already under 1MB
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    let { width, height } = img;
+                    if (width > maxWidth || height > maxHeight) {
+                        const ratio = Math.min(maxWidth / width, maxHeight / height);
+                        width = Math.round(width * ratio);
+                        height = Math.round(height * ratio);
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob((blob) => {
+                        if (blob && blob.size < file.size) {
+                            const compressed = new File([blob], file.name.replace(/\.[^.]+$/, '.webp'), {
+                                type: 'image/webp',
+                                lastModified: Date.now()
+                            });
+                            resolve(compressed);
+                        } else {
+                            resolve(file);
+                        }
+                    }, 'image/webp', quality);
+                };
+                img.onerror = () => resolve(file);
+                img.src = e.target.result;
+            };
+            reader.onerror = () => resolve(file);
+            reader.readAsDataURL(file);
+        });
+    }
 
     async function fetchStats() {
         try {
@@ -284,6 +327,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             metricPosters.textContent = statsRes.postersCount || 0;
             metricArticles.textContent = statsRes.articlesCount || 0;
+
+            if (adminDbStatus) {
+                if (statsRes.database === 'supabase') {
+                    adminDbStatus.textContent = 'SUPABASE CLOUD';
+                    adminDbStatus.style.color = '#3ecf8e';
+                } else {
+                    adminDbStatus.textContent = 'LOCAL / FALLBACK';
+                    adminDbStatus.style.color = '#f59e0b';
+                }
+            }
 
             if (adminServerStatus) {
                 if (cfxRes.online) {
@@ -421,7 +474,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('directImageUrl', posterDirectUrl.value.trim());
 
         if (posterFile.files && posterFile.files[0]) {
-            formData.append('image', posterFile.files[0]);
+            const compressed = await compressImage(posterFile.files[0]);
+            formData.append('image', compressed);
         }
 
         try {
@@ -574,7 +628,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('content', articleContent.value.trim());
 
         if (articleFile.files && articleFile.files[0]) {
-            formData.append('coverImage', articleFile.files[0]);
+            const compressed = await compressImage(articleFile.files[0]);
+            formData.append('coverImage', compressed);
         }
 
         try {
