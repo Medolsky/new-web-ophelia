@@ -479,8 +479,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const url = id ? `/api/posters/${id}` : '/api/posters';
+            const url = id ? `/api/posters?id=${encodeURIComponent(id)}` : '/api/posters';
             const method = id ? 'PUT' : 'POST';
+            if (id) formData.append('id', id);
 
             const res = await fetch(url, {
                 method,
@@ -490,14 +491,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: formData
             });
 
-            const data = await res.json();
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (e) {}
+
             if (res.ok && data.success) {
                 showToast(id ? 'Poster berhasil diperbarui!' : 'Poster baru berhasil ditambahkan!', 'success');
                 closeModal(modalPoster);
                 await fetchPosters();
                 await fetchStats();
             } else {
-                showToast(data.message || 'Gagal menyimpan poster.', 'error');
+                showToast(data.message || `Gagal menyimpan poster (Status ${res.status}).`, 'error');
             }
         } catch (err) {
             showToast('Terjadi kesalahan koneksi.', 'error');
@@ -633,8 +638,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const url = id ? `/api/articles/${id}` : '/api/articles';
+            const url = id ? `/api/articles?id=${encodeURIComponent(id)}` : '/api/articles';
             const method = id ? 'PUT' : 'POST';
+            if (id) formData.append('id', id);
 
             const res = await fetch(url, {
                 method,
@@ -644,14 +650,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: formData
             });
 
-            const data = await res.json();
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (e) {}
+
             if (res.ok && data.success) {
                 showToast(id ? 'Artikel berhasil diperbarui!' : 'Artikel baru berhasil dipublikasikan!', 'success');
                 closeModal(modalArticle);
                 await fetchArticles();
                 await fetchStats();
             } else {
-                showToast(data.message || 'Gagal menyimpan artikel.', 'error');
+                showToast(data.message || `Gagal menyimpan artikel (Status ${res.status}).`, 'error');
             }
         } catch (err) {
             showToast('Terjadi kesalahan koneksi.', 'error');
@@ -672,8 +682,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const endpoint = pendingDelete.type === 'poster' 
-                ? `/api/posters/${pendingDelete.id}` 
-                : `/api/articles/${pendingDelete.id}`;
+                ? `/api/posters?id=${encodeURIComponent(pendingDelete.id)}` 
+                : `/api/articles?id=${encodeURIComponent(pendingDelete.id)}`;
 
             const res = await fetch(endpoint, {
                 method: 'DELETE',
@@ -682,7 +692,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            const data = await res.json();
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (e) {}
+
             if (res.ok && data.success) {
                 showToast(`${pendingDelete.type === 'poster' ? 'Poster' : 'Artikel'} berhasil dihapus!`, 'success');
                 closeModal(modalDelete);
@@ -693,10 +707,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 await fetchStats();
             } else {
-                showToast(data.message || 'Gagal menghapus data.', 'error');
+                showToast(data.message || `Gagal menghapus data (Status: ${res.status}).`, 'error');
             }
         } catch (err) {
-            showToast('Terjadi kesalahan saat menghapus data.', 'error');
+            console.error('Delete request failed:', err);
+            showToast('Terjadi kesalahan koneksi saat menghapus data.', 'error');
         } finally {
             btnConfirmDelete.disabled = false;
             btnConfirmDelete.textContent = 'Hapus Sekarang';

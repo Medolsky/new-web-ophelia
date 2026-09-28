@@ -4,11 +4,11 @@
   "rewrites": [
     {
       "source": "/api/posters/:id",
-      "destination": "/api/posters.js?id=:id"
+      "destination": "/api/posters?id=:id"
     },
     {
       "source": "/api/articles/:id",
-      "destination": "/api/articles.js?id=:id"
+      "destination": "/api/articles?id=:id"
     }
   ]
 }
