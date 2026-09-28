@@ -107,35 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Hero Background Slideshow ----
     const heroBg = document.getElementById('hero-bg-slideshow');
-    const bgImages = [];
-    for (let i = 1; i <= 19; i++) {
-        bgImages.push(`asset/img/${i}.png`);
+    // Slideshow disabled when placeholder asset files are not uploaded yet
+    if (heroBg) {
+        heroBg.style.opacity = '1';
     }
-
-    let currentBgIndex = 0;
-
-    // Preload first image
-    const firstImg = new Image();
-    firstImg.src = bgImages[0];
-    firstImg.onload = () => {
-        heroBg.style.backgroundImage = `url('${bgImages[0]}')`;
-    };
-
-    function nextBg() {
-        currentBgIndex = (currentBgIndex + 1) % bgImages.length;
-        // Preload next image
-        const img = new Image();
-        img.src = bgImages[currentBgIndex];
-        img.onload = () => {
-            heroBg.style.opacity = '0';
-            setTimeout(() => {
-                heroBg.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
-                heroBg.style.opacity = '1';
-            }, 800);
-        };
-    }
-
-    setInterval(nextBg, 6000);
 
     // ---- Particles ----
     const particlesContainer = document.getElementById('particles');
@@ -217,114 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSection = document.getElementById('home');
     if (heroSection) heroObserver.observe(heroSection);
 
-    // ---- Gallery ----
-    const galleryGrid = document.getElementById('gallery-grid');
-    const galleryImages = [];
-    for (let i = 1; i <= 19; i++) {
-        galleryImages.push({
-            src: `asset/img/${i}.png`,
-            alt: `Ophelia Roleplay Screenshot ${i}`
-        });
-    }
 
-    galleryImages.forEach((img, index) => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        item.setAttribute('data-index', index);
-        item.innerHTML = `
-            <img src="${img.src}" alt="${img.alt}" loading="lazy">
-            <div class="gallery-item-overlay"></div>
-            <div class="gallery-item-frame"></div>
-            <div class="gallery-zoom-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                    <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-                </svg>
-            </div>
-            <div class="gallery-corner tl"></div>
-            <div class="gallery-corner tr"></div>
-            <div class="gallery-corner bl"></div>
-            <div class="gallery-corner br"></div>
-        `;
-        galleryGrid.appendChild(item);
-
-        // Click to open lightbox
-        item.addEventListener('click', () => openLightbox(index));
-    });
-
-    // Animate gallery items on scroll - reset when scrolling away
-    const galleryObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, i * 60);
-            } else {
-                entry.target.classList.remove('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        galleryObserver.observe(item);
-    });
-
-    // ---- Lightbox ----
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.getElementById('lightbox-close');
-    const lightboxPrev = document.getElementById('lightbox-prev');
-    const lightboxNext = document.getElementById('lightbox-next');
-    const lightboxCounter = document.getElementById('lightbox-counter');
-    let currentLightboxIndex = 0;
-
-    function openLightbox(index) {
-        currentLightboxIndex = index;
-        updateLightbox();
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    function updateLightbox() {
-        lightboxImg.src = galleryImages[currentLightboxIndex].src;
-        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
-    }
-
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
-
-    lightboxPrev.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
-        updateLightbox();
-    });
-
-    lightboxNext.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
-        updateLightbox();
-    });
-
-    // Keyboard navigation for lightbox
-    document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') {
-            currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
-            updateLightbox();
-        }
-        if (e.key === 'ArrowRight') {
-            currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
-            updateLightbox();
-        }
-    });
 
     // ---- Scroll Animations (reset on scroll away) ----
     const animateElements = document.querySelectorAll('[data-animate]');
@@ -396,26 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ---- Touch Swipe for Lightbox ----
-    let touchStartX = 0;
-    let touchEndX = 0;
 
-    lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    lightbox.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-                currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
-            } else {
-                currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
-            }
-            updateLightbox();
-        }
-    }, { passive: true });
 
     // ---- Text reveal for join section (reset on scroll away) ----
     const joinSection = document.getElementById('join');
@@ -444,6 +293,326 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.transform = '';
         });
     });
+
+    // ---- Team Category Filter ----
+    const filterBtns = document.querySelectorAll('.team-filter-btn');
+    const deptCards = document.querySelectorAll('.dept-card');
+
+    if (filterBtns.length > 0 && deptCards.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const targetFilter = btn.getAttribute('data-filter');
+
+                deptCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (targetFilter === 'all' || category === targetFilter) {
+                        card.style.display = 'flex';
+                        card.classList.add('animated');
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    // ---- Media & Publication (Posters & Articles) ----
+    const mediaGrid = document.getElementById('media-grid');
+    const mediaFilterBtns = document.querySelectorAll('.media-filter-btn');
+    const posterModal = document.getElementById('poster-modal');
+    const articleModal = document.getElementById('article-modal');
+
+    // Default Seed Data in case network fetch is delayed or offline
+    const defaultPosters = [
+        {
+            id: 'poster_1',
+            title: 'Grand Launching Ophelia City',
+            description: 'Poster resmi peresmian kota Ophelia Roleplay dengan sistem custom dan ekonomi stabil.',
+            imageUrl: 'asset/img/logo-3d.png',
+            category: 'EVENT',
+            createdAt: '2026-09-25T02:37:59.788Z'
+        },
+        {
+            id: 'poster_2',
+            title: 'Open Recruitment: Polisi & EMS',
+            description: 'Pendaftaran terbuka instansi kepolisian dan medis kota Ophelia Roleplay.',
+            imageUrl: 'asset/img/logo-kota.png',
+            category: 'RECRUITMENT',
+            createdAt: '2026-09-26T02:37:59.788Z'
+        },
+        {
+            id: 'poster_3',
+            title: 'Car Meet & Drift Championship',
+            description: 'Kompetisi modifikasi mobil dan adu kecepatan di Los Santos Airport.',
+            imageUrl: 'asset/img/logo-3d.png',
+            category: 'COMMUNITY',
+            createdAt: '2026-09-27T02:37:59.788Z'
+        }
+    ];
+
+    const defaultArticles = [
+        {
+            id: 'article_1',
+            title: 'Pembaruan Fitur Framework v2.4 & Optimalisasi FPS Kota',
+            category: 'PATCH NOTES',
+            author: 'Developer Team',
+            coverUrl: 'asset/img/logo-3d.png',
+            excerpt: 'Simak rangkuman pembaharuan script custom pekerjaan, optimalisasi handling mobil, dan peningkatan kestabilan server.',
+            content: 'Warga Ophelia Roleplay yang terhormat,\n\nKami dengan bangga merilis pembaruan v2.4 yang difokuskan pada peningkatan performa dan kenyamanan bermain:\n\n1. Optimalisasi Script Core: Pengurangan lag spike dan latensi FiveM hingga 35%.\n2. Modifikasi Kendaraan: Penyeimbangan handling mobil sport, SUV dinas kepolisian, dan ambulans.\n3. Fitur Pekerjaan Baru: Penambahan variasi pekerjaan legal dan perluasan interaksi pedagang pasar.\n4. Sistem Keamanan Kota: Pengetatan integrasi Anti-Cheat dan proteksi cyber kota.\n\nSelamat menikmati petualangan roleplay yang lebih imersif dan kompetitif di Ophelia!',
+            createdAt: '2026-09-25T02:37:59.788Z'
+        },
+        {
+            id: 'article_2',
+            title: 'Panduan Menjadi Warga Baru & Aturan Roleplay Ophelia',
+            category: 'GUIDE',
+            author: 'Head Admin',
+            coverUrl: 'asset/img/logo-kota.png',
+            excerpt: 'Panduan lengkap seputar etika roleplay, istilah penting (FailRP, VDM, RDM), dan tata tertib hidup di kota Ophelia.',
+            content: 'Bagi seluruh pendatang baru di Ophelia Roleplay, perhatikan prinsip utama dalam menjaga kualitas cerita roleplay bersama:\n\n- Hormati Value of Life: Selalu hargai nyawa karakter Anda dalam setiap skenario kejahatan maupun kecelakaan.\n- No Random Death Match (RDM) & Vehicle Death Match (VDM): Dilarang melukai atau menabrak warga tanpa latar belakang roleplay yang jelas.\n- Menghormati Instansi: Hormati petugas kepolisian dan paramedis saat bertugas di TKP.\n\nCiptakan jalan cerita yang unik dan bangun reputasi karaktermu bersama komunitas kami!',
+            createdAt: '2026-09-26T02:37:59.788Z'
+        },
+        {
+            id: 'article_3',
+            title: 'Event Komunitas: Turnamen Underground & Pasar Malam',
+            category: 'EVENT',
+            author: 'Kreatif Team',
+            coverUrl: 'asset/img/logo-3d.png',
+            excerpt: 'Bersiaplah untuk festival akhir pekan dengan hadiah ratusan juta rupiah uang in-game dan gelar juara kota.',
+            content: 'Malam minggu ini Ophelia akan menggelar rangkaian event meriah:\n\n- Drag Race Championship di runway Sandy Shores.\n- Bazar Pedagang Kaki Lima di pusat kota dengan diskon makanan & merchandise khusus.\n- Konser musik live di Diamond Casino Roof.\n\nPastikan Anda mendaftarkan tim dan kendaraan terbaik Anda melalui Discord resmi Ophelia Roleplay!',
+            createdAt: '2026-09-27T02:37:59.788Z'
+        }
+    ];
+
+    let allMediaItems = [];
+
+    async function loadMediaContent() {
+        if (!mediaGrid) return;
+
+        // Render defaults immediately first so user never sees blank space
+        setAndRenderMedia(defaultPosters, defaultArticles);
+
+        try {
+            const [postersRes, articlesRes] = await Promise.all([
+                fetch('/api/posters').then(r => r.ok ? r.json() : []).catch(() => []),
+                fetch('/api/articles').then(r => r.ok ? r.json() : []).catch(() => [])
+            ]);
+
+            const posters = Array.isArray(postersRes) && postersRes.length > 0 ? postersRes : defaultPosters;
+            const articles = Array.isArray(articlesRes) && articlesRes.length > 0 ? articlesRes : defaultArticles;
+
+            setAndRenderMedia(posters, articles);
+        } catch (err) {
+            console.warn('[Ophelia Media] Using default media:', err);
+        }
+    }
+
+    function setAndRenderMedia(posters, articles) {
+        allMediaItems = [
+            ...posters.map(p => ({ ...p, type: 'poster' })),
+            ...articles.map(a => ({ ...a, type: 'article' }))
+        ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        const activeBtn = document.querySelector('.media-filter-btn.active');
+        const currentFilter = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+        renderMediaGrid(currentFilter);
+    }
+
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        try {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+        } catch (e) {
+            return dateStr;
+        }
+    }
+
+    function renderMediaGrid(filter) {
+        if (!mediaGrid) return;
+        mediaGrid.innerHTML = '';
+
+        const filtered = allMediaItems.filter(item => filter === 'all' || item.type === filter);
+
+        if (filtered.length === 0) {
+            mediaGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 48px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); border-radius: 16px;">
+                    <p style="color: var(--text-muted); font-size: 15px;">Belum ada konten publikasi untuk kategori ini.</p>
+                </div>
+            `;
+            return;
+        }
+
+        filtered.forEach(item => {
+            if (item.type === 'poster') {
+                const card = document.createElement('div');
+                card.className = 'poster-card';
+                card.innerHTML = `
+                    <div class="poster-img-wrap">
+                        <img src="${item.imageUrl || 'asset/img/logo-3d.png'}" alt="${item.title}" class="poster-img" loading="lazy" onerror="this.onerror=null;this.src='asset/img/logo-3d.png';">
+                        <div class="poster-overlay">
+                            <div class="poster-top-bar">
+                                <span class="media-tag">${item.category || 'EVENT'}</span>
+                                <div class="poster-zoom-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                                </div>
+                            </div>
+                            <div class="poster-bottom-info">
+                                <h3 class="poster-title">${item.title}</h3>
+                                <span class="poster-meta">${formatDate(item.createdAt)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openPosterModal(item));
+                mediaGrid.appendChild(card);
+            } else if (item.type === 'article') {
+                const card = document.createElement('div');
+                card.className = 'article-card';
+                card.innerHTML = `
+                    <div class="article-cover-wrap">
+                        <img src="${item.coverUrl || 'asset/img/logo-3d.png'}" alt="${item.title}" class="article-cover" loading="lazy" onerror="this.onerror=null;this.src='asset/img/logo-3d.png';">
+                    </div>
+                    <div class="article-body">
+                        <div class="article-meta-row">
+                            <span class="media-tag tag-article">${item.category || 'BERITA'}</span>
+                            <span class="article-date">${formatDate(item.createdAt)}</span>
+                        </div>
+                        <h3 class="article-title">${item.title}</h3>
+                        <p class="article-excerpt">${item.excerpt || ''}</p>
+                        <div class="article-btn-read">
+                            <span>Baca Selengkapnya</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openArticleModal(item));
+                mediaGrid.appendChild(card);
+            }
+        });
+    }
+
+    // Filter Buttons
+    if (mediaFilterBtns.length > 0) {
+        mediaFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                mediaFilterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                renderMediaGrid(filter);
+            });
+        });
+    }
+
+    function openPosterModal(poster) {
+        if (!posterModal) return;
+        const posterImg = document.getElementById('poster-modal-img');
+        posterImg.onerror = function() { this.src = 'asset/img/logo-3d.png'; };
+        posterImg.src = poster.imageUrl || 'asset/img/logo-3d.png';
+        document.getElementById('poster-modal-tag').textContent = poster.category || 'EVENT';
+        document.getElementById('poster-modal-title').textContent = poster.title;
+        document.getElementById('poster-modal-desc').textContent = poster.description || '';
+        document.getElementById('poster-modal-date').textContent = formatDate(poster.createdAt);
+
+        posterModal.classList.add('active');
+        posterModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePosterModal() {
+        if (!posterModal) return;
+        posterModal.classList.remove('active');
+        posterModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function openArticleModal(article) {
+        if (!articleModal) return;
+        document.getElementById('article-modal-tag').textContent = article.category || 'BERITA';
+        document.getElementById('article-modal-date').textContent = formatDate(article.createdAt);
+        document.getElementById('article-modal-author').textContent = article.author ? `Penulis: ${article.author}` : '';
+        document.getElementById('article-modal-title').textContent = article.title;
+        const articleCover = document.getElementById('article-modal-cover');
+        articleCover.onerror = function() { this.src = 'asset/img/logo-3d.png'; };
+        articleCover.src = article.coverUrl || 'asset/img/logo-3d.png';
+        document.getElementById('article-modal-body').textContent = article.content || article.excerpt || '';
+
+        articleModal.classList.add('active');
+        articleModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeArticleModal() {
+        if (!articleModal) return;
+        articleModal.classList.remove('active');
+        articleModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    // Close handlers
+    document.getElementById('poster-modal-close')?.addEventListener('click', closePosterModal);
+    document.getElementById('poster-modal-backdrop')?.addEventListener('click', closePosterModal);
+    document.getElementById('article-modal-close')?.addEventListener('click', closeArticleModal);
+    document.getElementById('article-modal-backdrop')?.addEventListener('click', closeArticleModal);
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closePosterModal();
+            closeArticleModal();
+        }
+    });
+
+    // ---- Live CFX Server Status & Player Counter ----
+    const navStatusDot = document.getElementById('nav-status-dot');
+    const navPlayerCount = document.getElementById('nav-player-count');
+    const heroStatusDot = document.getElementById('hero-status-dot');
+    const heroLiveText = document.getElementById('hero-live-text');
+    const livePlayerCount = document.getElementById('live-player-count');
+
+    async function fetchLiveServerStatus() {
+        try {
+            const res = await fetch('/api/server-status');
+            const data = await res.json();
+
+            if (data.online) {
+                const clients = typeof data.clients === 'number' ? data.clients : 0;
+                const maxClients = data.maxClients || 1000;
+
+                if (navPlayerCount) {
+                    navPlayerCount.textContent = `${clients} / ${maxClients} PLAYERS`;
+                }
+                if (navStatusDot) navStatusDot.classList.remove('offline');
+                if (heroStatusDot) heroStatusDot.classList.remove('offline');
+                if (heroLiveText) {
+                    heroLiveText.innerHTML = `CFX SERVER ONLINE &bull; ${clients} / ${maxClients} PLAYERS`;
+                }
+                if (livePlayerCount) {
+                    livePlayerCount.setAttribute('data-target', clients);
+                    livePlayerCount.textContent = clients;
+                }
+            } else {
+                if (navPlayerCount) navPlayerCount.textContent = 'OFFLINE';
+                if (navStatusDot) navStatusDot.classList.add('offline');
+                if (heroStatusDot) heroStatusDot.classList.add('offline');
+                if (heroLiveText) {
+                    heroLiveText.innerHTML = `CFX SERVER MAINTENANCE / OFFLINE`;
+                }
+                if (livePlayerCount) {
+                    livePlayerCount.setAttribute('data-target', 0);
+                    livePlayerCount.textContent = '0';
+                }
+            }
+        } catch (err) {
+            console.warn('[CFX Status Fetch Error]:', err);
+        }
+    }
+
+    // Initial fetch & recurring polling every 15 seconds
+    fetchLiveServerStatus();
+    setInterval(fetchLiveServerStatus, 15000);
+
+    loadMediaContent();
 
     console.log('%c OPHELIA ROLEPLAY ', 'background: #B91C1C; color: white; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 4px;');
     console.log('%c Website by Ophelia Dev Team ', 'color: #A3A3A3; font-size: 12px;');

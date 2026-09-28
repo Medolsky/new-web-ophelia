@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260928_v7">
 </head>
 <body>
     <!-- Preloader -->
@@ -38,13 +38,17 @@
             <div class="nav-links" id="nav-links">
                 <a href="#home" class="nav-link active" data-section="home">HOME</a>
                 <a href="#about" class="nav-link" data-section="about">ABOUT</a>
-                <a href="#gallery" class="nav-link" data-section="gallery">GALLERY</a>
                 <a href="#features" class="nav-link" data-section="features">FEATURES</a>
+                <a href="#media" class="nav-link" data-section="media">POSTER &amp; BERITA</a>
                 <a href="#team" class="nav-link" data-section="team">TEAM</a>
                 <a href="#join" class="nav-link" data-section="join">JOIN US</a>
             </div>
             <div class="nav-actions">
-                <a href="https://cfx.re/join/kr3glr" target="_blank" class="btn btn-primary btn-nav">
+                <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="nav-server-badge" id="nav-server-badge" title="Live FiveM CFX Server Status">
+                    <span class="status-pulse-dot" id="nav-status-dot"></span>
+                    <span class="nav-badge-text" id="nav-player-count">0 / 1000 PLAYERS</span>
+                </a>
+                <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="btn btn-primary btn-nav">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                     PLAY NOW
                 </a>
@@ -62,12 +66,13 @@
         <div class="mobile-menu-content">
             <a href="#home" class="mobile-link">HOME</a>
             <a href="#about" class="mobile-link">ABOUT</a>
-            <a href="#gallery" class="mobile-link">GALLERY</a>
             <a href="#features" class="mobile-link">FEATURES</a>
+            <a href="#media" class="mobile-link">POSTER &amp; BERITA</a>
             <a href="#team" class="mobile-link">TEAM</a>
             <a href="#join" class="mobile-link">JOIN US</a>
+            <a href="admin.html" class="mobile-link text-red" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px; padding-top: 12px;">ADMIN PANEL &rarr;</a>
             <div class="mobile-menu-actions">
-                <a href="https://cfx.re/join/kr3glr" target="_blank" class="btn btn-primary">PLAY NOW</a>
+                <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="btn btn-primary">PLAY NOW</a>
             </div>
         </div>
     </div>
@@ -81,7 +86,7 @@
         </div>
         <div class="hero-content">
             <div class="hero-logo-3d">
-                <img src="asset/img/logo-3d.gif" alt="Ophelia 3D Logo" class="logo-3d-img">
+                <img src="asset/img/logo-3d.png" alt="Ophelia 3D Logo" class="logo-3d-img">
             </div>
             <h1 class="hero-title" id="hero-title">
                 <span class="title-line">
@@ -92,10 +97,14 @@
                 </span>
             </h1>
             <p class="hero-subtitle">Experience the ultimate GTA V Roleplay</p>
+            <div class="hero-live-indicator" id="hero-live-indicator">
+                <span class="status-pulse-dot" id="hero-status-dot"></span>
+                <span class="hero-live-text" id="hero-live-text">CFX SERVER ONLINE &bull; 0 / 1000 PLAYERS</span>
+            </div>
             <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="150">0</span>
-                    <span class="stat-label">PLAYERS</span>
+                <div class="stat-item" id="hero-stat-players">
+                    <span class="stat-number stat-no-plus" id="live-player-count" data-target="0">0</span>
+                    <span class="stat-label">PLAYERS ONLINE</span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item">
@@ -109,7 +118,7 @@
                 </div>
             </div>
             <div class="hero-cta">
-                <a href="https://cfx.re/join/kr3glr" target="_blank" class="btn btn-primary btn-lg">
+                <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="btn btn-primary btn-lg">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                     CONNECT TO SERVER
                 </a>
@@ -181,37 +190,6 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="section gallery">
-        <div class="container">
-            <div class="section-header" data-animate="fade-up">
-                <span class="section-tag">GALLERY</span>
-                <h2 class="section-title">LIFE IN <span class="text-red">OPHELIA</span></h2>
-                <div class="section-line"></div>
-                <p class="section-desc">Momen-momen terbaik dari komunitas Ophelia Roleplay</p>
-            </div>
-            <div class="gallery-grid" id="gallery-grid">
-                <!-- Gallery items injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="Gallery Image">
-        </div>
-        <div class="lightbox-counter" id="lightbox-counter"></div>
-    </div>
 
     <!-- Features Section -->
     <section id="features" class="section features">
@@ -269,93 +247,509 @@
         </div>
     </section>
 
+    <!-- Media Section (Posters & Articles) -->
+    <section id="media" class="section media-section">
+        <div class="container">
+            <div class="section-header" data-animate="fade-up">
+                <span class="section-tag">PUBLIKASI KOTA</span>
+                <h2 class="section-title">POSTER &amp; <span class="text-red">ARTIKEL</span></h2>
+                <div class="section-line"></div>
+                <p class="section-desc">Kumpulan poster visual event, pengumuman penting, serta artikel dan update resmi kota Ophelia Roleplay</p>
+            </div>
+
+            <!-- Media Category Filter Tabs -->
+            <div class="media-filter-bar" data-animate="fade-up">
+                <button class="media-filter-btn active" data-filter="all">SEMUA</button>
+                <button class="media-filter-btn" data-filter="poster">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                    POSTER FOTO
+                </button>
+                <button class="media-filter-btn" data-filter="article">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                    BERITA &amp; ARTIKEL
+                </button>
+            </div>
+
+            <!-- Media Content Grid (Hydrated by JS from API) -->
+            <div class="media-grid" id="media-grid">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Poster Lightbox Modal -->
+    <div class="media-modal" id="poster-modal" aria-hidden="true">
+        <div class="media-modal-backdrop" id="poster-modal-backdrop"></div>
+        <div class="media-modal-dialog poster-dialog">
+            <button class="media-modal-close" id="poster-modal-close" aria-label="Tutup">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="poster-modal-img-wrap">
+                <img id="poster-modal-img" src="" alt="Poster Preview">
+            </div>
+            <div class="poster-modal-info">
+                <span class="media-tag" id="poster-modal-tag">EVENT</span>
+                <h3 class="poster-modal-title" id="poster-modal-title">Judul Poster</h3>
+                <p class="poster-modal-desc" id="poster-modal-desc">Deskripsi poster.</p>
+                <span class="poster-modal-date" id="poster-modal-date"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Reader Modal -->
+    <div class="media-modal" id="article-modal" aria-hidden="true">
+        <div class="media-modal-backdrop" id="article-modal-backdrop"></div>
+        <div class="media-modal-dialog article-dialog">
+            <button class="media-modal-close" id="article-modal-close" aria-label="Tutup">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="article-modal-header">
+                <div class="article-modal-meta">
+                    <span class="media-tag" id="article-modal-tag">BERITA</span>
+                    <span class="article-modal-date" id="article-modal-date"></span>
+                    <span class="article-modal-author" id="article-modal-author"></span>
+                </div>
+                <h2 class="article-modal-title" id="article-modal-title">Judul Artikel</h2>
+            </div>
+            <div class="article-modal-cover-wrap">
+                <img id="article-modal-cover" src="" alt="Article Cover">
+            </div>
+            <div class="article-modal-body" id="article-modal-body">
+                <!-- Content -->
+            </div>
+        </div>
+    </div>
+
     <!-- Team Section -->
     <section id="team" class="section team">
         <div class="section-bg-pattern"></div>
         <div class="container">
             <div class="section-header" data-animate="fade-up">
-                <span class="section-tag">STAFF KOTA</span>
-                <h2 class="section-title">MEET THE <span class="text-red">TEAM</span></h2>
+                <span class="section-tag">STRUKTUR KOTA</span>
+                <h2 class="section-title">STRUKTUR & <span class="text-red">STAFF</span></h2>
                 <div class="section-line"></div>
-                <p class="section-desc">Para pendiri dan pengelola yang menjaga kestabilan kota Ophelia Roleplay</p>
+                <p class="section-desc">Jajaran kepengurusan, divisi teknis, manajemen, dan pimpinan instansi kota Ophelia Roleplay</p>
             </div>
-            <div class="team-grid">
-                <!-- Owner Card -->
-                <div class="team-card" data-animate="fade-up" data-delay="0">
-                    <div class="team-card-inner">
-                        <div class="team-avatar-container">
-                            <div class="team-avatar-glow"></div>
-                            <div class="team-avatar-border"></div>
-                            <img src="asset/img/logo-kota.png" alt="Owner ORP - D" class="team-avatar">
+
+            <!-- Owner Spotlight Card -->
+            <div class="owner-spotlight" data-animate="fade-up">
+                <div class="owner-spotlight-inner">
+                    <div class="owner-avatar-wrapper">
+                        <div class="owner-avatar-glow"></div>
+                        <div class="owner-avatar-ring"></div>
+                        <img src="asset/img/logo-3d.png" alt="Owner Saiko" class="owner-avatar">
+                        <span class="owner-status-beacon" title="Active Leadership"></span>
+                    </div>
+                    <div class="owner-content">
+                        <div class="owner-badge-row">
+                            <span class="team-role-badge badge-owner">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
+                                OWNER & FOUNDER
+                            </span>
+                            <span class="owner-callsign">TOP EXECUTIVE COMMAND</span>
                         </div>
-                        <div class="team-info">
-                            <span class="team-role-badge badge-owner">OWNER</span>
-                            <h3 class="team-name">ORP - D</h3>
-                            <p class="team-bio">Founder dan visioner utama di balik berdirinya kota Ophelia Roleplay.</p>
-                            <div class="team-socials">
-                                <a href="https://discord.gg/opheliaroleplay" target="_blank" class="team-social-icon" aria-label="Discord">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
-                                </a>
+                        <h3 class="owner-title">SAIKO</h3>
+                        <p class="owner-desc">Pemegang kendali tertinggi dan visi utama di balik pembangunan Ophelia Roleplay. Mengawasi stabilitas server, arah kebijakan komunitas, dan integrasi seluruh divisi kota.</p>
+                        <div class="owner-tags">
+                            <span class="owner-tag">OPHELIA #1</span>
+                            <span class="owner-tag">SERVER DIRECTOR</span>
+                            <span class="owner-tag">SUPREME MANAGEMENT</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="team-filter-bar" data-animate="fade-up">
+                <button class="team-filter-btn active" data-filter="all">SEMUA DIVISI</button>
+                <button class="team-filter-btn" data-filter="tech">DEV & CYBER</button>
+                <button class="team-filter-btn" data-filter="mgmt">MANAJEMEN & KOMUNITAS</button>
+                <button class="team-filter-btn" data-filter="faction">INSTANSI KOTA</button>
+            </div>
+
+            <!-- Department Bento Grid -->
+            <div class="dept-grid">
+                <!-- 1. DEVELOPER -->
+                <div class="dept-card" data-category="tech" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">SYSTEM & SCRIPTS</span>
+                            <h3 class="dept-name">DEVELOPER</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">KETUA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">SAHABAT KITA SEMUA</span>
+                                </div>
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">RUPI GEMBROT</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Head Admin Card -->
-                <div class="team-card" data-animate="fade-up" data-delay="100">
-                    <div class="team-card-inner">
-                        <div class="team-avatar-container">
-                            <div class="team-avatar-glow"></div>
-                            <div class="team-avatar-border"></div>
-                            <img src="asset/img/logo-kota.png" alt="Head Admin ORP - MEDOLSKYYY" class="team-avatar">
+
+                <!-- 2. CYBER & SECURITY -->
+                <div class="dept-card" data-category="tech" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         </div>
-                        <div class="team-info">
-                            <span class="team-role-badge badge-headadmin">HEAD ADMIN & MODDER</span>
-                            <h3 class="team-name">ORP - MEDOLSKYYY</h3>
-                            <p class="team-bio">Mengawasi seluruh operasional admin kota sekaligus memodifikasi aset game.</p>
-                            <div class="team-socials">
-                                <a href="https://discord.gg/opheliaroleplay" target="_blank" class="team-social-icon" aria-label="Discord">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
-                                </a>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">INTEGRITY & DEFENSE</span>
+                            <h3 class="dept-name">CYBER & SECURITY</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">KETUA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">DANTE</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">FARHAN</span>
+                                </div>
+                                <div class="member-chip">
+                                    <span class="chip-name">JOSH</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Developer Card -->
-                <div class="team-card" data-animate="fade-up" data-delay="200">
-                    <div class="team-card-inner">
-                        <div class="team-avatar-container">
-                            <div class="team-avatar-glow"></div>
-                            <div class="team-avatar-border"></div>
-                            <img src="asset/img/logo-kota.png" alt="Developer ORP - K" class="team-avatar">
+
+                <!-- 3. MODDER -->
+                <div class="dept-card" data-category="tech" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                         </div>
-                        <div class="team-info">
-                            <span class="team-role-badge badge-developer">DEVELOPER</span>
-                            <h3 class="team-name">ORP - K</h3>
-                            <p class="team-bio">Menangani pengembangan sistem backend, script kustom, dan optimalisasi server.</p>
-                            <div class="team-socials">
-                                <a href="https://discord.gg/opheliaroleplay" target="_blank" class="team-social-icon" aria-label="Discord">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
-                                </a>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">CUSTOM ASSETS</span>
+                            <h3 class="dept-name">MODDER</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-spec">PED / CLOTHING</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip spec-chip">
+                                    <span class="chip-name">DIMAS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-spec">KENDARAAN / HANDLING</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip spec-chip">
+                                    <span class="chip-name">DAPIT</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Modder Card -->
-                <div class="team-card" data-animate="fade-up" data-delay="300">
-                    <div class="team-card-inner">
-                        <div class="team-avatar-container">
-                            <div class="team-avatar-glow"></div>
-                            <div class="team-avatar-border"></div>
-                            <img src="asset/img/logo-kota.png" alt="Modder ORP - ZUNA" class="team-avatar">
+
+                <!-- 4. BADSIDE MANAGEMENT -->
+                <div class="dept-card dept-card-badside" data-category="mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box badside-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
                         </div>
-                        <div class="team-info">
-                            <span class="team-role-badge badge-modder">MODDER</span>
-                            <h3 class="team-name">ORP - ZUNA</h3>
-                            <p class="team-bio">Memodifikasi mobil, baju, peta, dan berbagai aset visual 3D di kota.</p>
-                            <div class="team-socials">
-                                <a href="https://discord.gg/opheliaroleplay" target="_blank" class="team-social-icon" aria-label="Discord">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
-                                </a>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag text-red">UNDERWORLD OVERSIGHT</span>
+                            <h3 class="dept-name">BADSIDE MANAGEMENT</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips member-chips-grid">
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">ALAN</span>
+                                    <span class="chip-meta">BADSIDE &amp; HT</span>
+                                </div>
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">DANTE</span>
+                                    <span class="chip-meta">CYBER</span>
+                                </div>
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">SEAN</span>
+                                    <span class="chip-meta">HT</span>
+                                </div>
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">PUTRA</span>
+                                    <span class="chip-meta">BADSIDE &amp; HT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. PEDAGANG -->
+                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">COMMERCE &amp; TRADE</span>
+                            <h3 class="dept-name">PEDAGANG</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">KETUA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">PIWPIW</span>
+                                    <span class="chip-meta">ZARA</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">MAWING</span>
+                                </div>
+                                <div class="member-chip">
+                                    <span class="chip-name">JASON</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. DONASI -->
+                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">TREASURY &amp; SUPPORT</span>
+                            <h3 class="dept-name">DONASI</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">DAPIT</span>
+                                </div>
+                                <div class="member-chip">
+                                    <span class="chip-name">LASKAR</span>
+                                </div>
+                                <div class="member-chip">
+                                    <span class="chip-name">ELISAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. KREATIF -->
+                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">MEDIA &amp; CONTENT</span>
+                            <h3 class="dept-name">KREATIF</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">MARSHAL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. PJ BOCIL -->
+                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">COMMUNITY CARE</span>
+                            <h3 class="dept-name">PJ BOCIL</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">PENANGGUNG JAWAB</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">ELISAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. POLISI -->
+                <div class="dept-card dept-card-faction" data-category="faction" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box faction-police">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag tag-police">LAW ENFORCEMENT</span>
+                            <h3 class="dept-name">POLISI</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">KETUA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">NASAA</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">NATHAN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. MEKANIK -->
+                <div class="dept-card dept-card-faction" data-category="faction" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box faction-mechanic">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag tag-mechanic">AUTOMOTIVE &amp; WORKS</span>
+                            <h3 class="dept-name">MEKANIK</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">KETUA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">REYY</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">LASKAR</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. EMS -->
+                <div class="dept-card dept-card-faction" data-category="faction" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box faction-ems">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag tag-ems">MEDICAL RESPONSE</span>
+                            <h3 class="dept-name">EMS</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">KETUA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">PANPAN</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">BAGUS</span>
+                                </div>
+                                <div class="member-chip">
+                                    <span class="chip-name">NOMNOM</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -372,11 +766,11 @@
         </div>
         <div class="container">
             <div class="join-content" data-animate="fade-up">
-                <img src="asset/img/logo-3d.gif" alt="Ophelia Logo" class="join-logo">
+                <img src="asset/img/logo-3d.png" alt="Ophelia Logo" class="join-logo">
                 <h2 class="join-title">READY TO <span class="text-red">JOIN</span>?</h2>
                 <p class="join-desc">Mulai petualangan roleplay kamu sekarang. Bergabunglah dengan komunitas Ophelia dan ciptakan ceritamu sendiri!</p>
                 <div class="join-buttons">
-                    <a href="https://cfx.re/join/kr3glr" target="_blank" class="btn btn-primary btn-xl" id="btn-connect">
+                    <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="btn btn-primary btn-xl" id="btn-connect">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         CONNECT TO SERVER
                     </a>
@@ -409,15 +803,16 @@
                     <h4 class="footer-col-title">QUICK LINKS</h4>
                     <a href="#home" class="footer-link">Home</a>
                     <a href="#about" class="footer-link">About</a>
-                    <a href="#gallery" class="footer-link">Gallery</a>
                     <a href="#features" class="footer-link">Features</a>
+                    <a href="#media" class="footer-link">Poster &amp; Berita</a>
                     <a href="#team" class="footer-link">Team</a>
                 </div>
                 <div class="footer-links-col">
                     <h4 class="footer-col-title">CONNECT</h4>
-                    <a href="https://cfx.re/join/kr3glr" target="_blank" class="footer-link">FiveM Server</a>
+                    <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="footer-link">FiveM Server</a>
                     <a href="https://discord.gg/opheliaroleplay" target="_blank" class="footer-link">Discord</a>
                     <a href="https://ophelia.tebex.io/" target="_blank" class="footer-link">Tebex Store</a>
+                    <a href="admin.html" class="footer-link text-red" style="font-weight: 700;">Admin Dashboard &rarr;</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -431,6 +826,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260928_v7"></script>
 </body>
 </html>
