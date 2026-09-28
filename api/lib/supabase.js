@@ -1,12 +1,19 @@
 const { createClient } = require('@supabase/supabase-js');
 const defaultDb = require('../../data/db.json');
 
-const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const DEFAULT_SUPABASE_URL = 'https://pyqeamlsglsrqbsnripz.supabase.co';
+const DEFAULT_SUPABASE_KEY = 'sb_publishable_Lc5XCpjjC92ihtE095VuUg_aXOvl9Iq';
+
+const supabaseUrl = process.env.SUPABASE_URL || 
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 
+    DEFAULT_SUPABASE_URL;
+
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 
     process.env.SUPABASE_KEY || 
     process.env.SUPABASE_ANON_KEY || 
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 
+    DEFAULT_SUPABASE_KEY;
 
 let supabase = null;
 if (supabaseUrl && supabaseKey) {

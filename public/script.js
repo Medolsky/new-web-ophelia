@@ -390,21 +390,33 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadMediaContent() {
         if (!mediaGrid) return;
 
-        // Render defaults immediately first so user never sees blank space
-        setAndRenderMedia(defaultPosters, defaultArticles);
+        // Show subtle loading state initially instead of flashing dummy data
+        mediaGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; color: var(--text-muted);">
+                <div style="width: 24px; height: 24px; border: 2px solid rgba(255,255,255,0.1); border-top-color: #E63946; border-radius: 50%; margin: 0 auto 12px; animation: spin 0.8s linear infinite;"></div>
+                <p style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Memuat Konten...</p>
+            </div>
+        `;
 
         try {
             const [postersRes, articlesRes] = await Promise.all([
-                fetch('/api/posters').then(r => r.ok ? r.json() : []).catch(() => []),
-                fetch('/api/articles').then(r => r.ok ? r.json() : []).catch(() => [])
+                fetch(`/api/posters?_t=${Date.now()}`, { cache: 'no-store' })
+                    .then(r => r.ok ? r.json() : null)
+                    .catch(() => null),
+                fetch(`/api/articles?_t=${Date.now()}`, { cache: 'no-store' })
+                    .then(r => r.ok ? r.json() : null)
+                    .catch(() => null)
             ]);
 
-            const posters = Array.isArray(postersRes) && postersRes.length > 0 ? postersRes : defaultPosters;
-            const articles = Array.isArray(articlesRes) && articlesRes.length > 0 ? articlesRes : defaultArticles;
+            // If API responded with an array, use it directly (even if empty [] when items were deleted in admin panel).
+            // Only fallback to defaults if API completely failed to respond (null) e.g. static local preview.
+            const posters = Array.isArray(postersRes) ? postersRes : defaultPosters;
+            const articles = Array.isArray(articlesRes) ? articlesRes : defaultArticles;
 
             setAndRenderMedia(posters, articles);
         } catch (err) {
             console.warn('[Ophelia Media] Using default media:', err);
+            setAndRenderMedia(defaultPosters, defaultArticles);
         }
     }
 
