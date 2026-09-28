@@ -331,53 +331,25 @@
                 <p class="section-desc">Jajaran kepengurusan, divisi teknis, manajemen, dan pimpinan instansi kota Ophelia Roleplay</p>
             </div>
 
-            <!-- Owner Spotlight Card -->
-            <div class="owner-spotlight" data-animate="fade-up">
-                <div class="owner-spotlight-inner">
-                    <div class="owner-avatar-wrapper">
-                        <div class="owner-avatar-glow"></div>
-                        <div class="owner-avatar-ring"></div>
-                        <img src="asset/img/logo-3d.png" alt="Owner Saiko" class="owner-avatar">
-                        <span class="owner-status-beacon" title="Active Leadership"></span>
-                    </div>
-                    <div class="owner-content">
-                        <div class="owner-badge-row">
-                            <span class="team-role-badge badge-owner">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
-                                OWNER & FOUNDER
-                            </span>
-                            <span class="owner-callsign">TOP EXECUTIVE COMMAND</span>
-                        </div>
-                        <h3 class="owner-title">SAIKO</h3>
-                        <p class="owner-desc">Pemegang kendali tertinggi dan visi utama di balik pembangunan Ophelia Roleplay. Mengawasi stabilitas server, arah kebijakan komunitas, dan integrasi seluruh divisi kota.</p>
-                        <div class="owner-tags">
-                            <span class="owner-tag">OPHELIA #1</span>
-                            <span class="owner-tag">SERVER DIRECTOR</span>
-                            <span class="owner-tag">SUPREME MANAGEMENT</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category Filter Tabs -->
+                        <!-- Category Filter Tabs -->
             <div class="team-filter-bar" data-animate="fade-up">
                 <button class="team-filter-btn active" data-filter="all">SEMUA DIVISI</button>
-                <button class="team-filter-btn" data-filter="tech">DEV & CYBER</button>
-                <button class="team-filter-btn" data-filter="mgmt">MANAJEMEN & KOMUNITAS</button>
+                <button class="team-filter-btn" data-filter="tech">DEV &amp; CYBER</button>
+                <button class="team-filter-btn" data-filter="mgmt">MANAJEMEN &amp; KOMUNITAS</button>
                 <button class="team-filter-btn" data-filter="faction">INSTANSI KOTA</button>
             </div>
 
             <!-- Department Bento Grid -->
             <div class="dept-grid">
                 <!-- 1. DEVELOPER -->
-                <div class="dept-card" data-category="tech" data-animate="fade-up">
+                <div class="dept-card dept-card-lead" data-category="tech" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
                         <div class="dept-icon-box">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                         </div>
                         <div class="dept-title-group">
-                            <span class="dept-category-tag">SYSTEM & SCRIPTS</span>
+                            <span class="dept-category-tag">SYSTEM &amp; CORE SCRIPTS</span>
                             <h3 class="dept-name">DEVELOPER</h3>
                         </div>
                     </div>
@@ -400,7 +372,34 @@
                     </div>
                 </div>
 
-                <!-- 2. CYBER & SECURITY -->
+                <!-- 2. HEAD ADMIN -->
+                <div class="dept-card dept-card-lead" data-category="tech mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">HIGH COMMAND</span>
+                            <h3 class="dept-name">HEAD ADMIN</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">HEAD ADMIN</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">LOPINAZ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. CYBER & SECURITY -->
                 <div class="dept-card" data-category="tech" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
@@ -408,8 +407,8 @@
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         </div>
                         <div class="dept-title-group">
-                            <span class="dept-category-tag">INTEGRITY & DEFENSE</span>
-                            <h3 class="dept-name">CYBER & SECURITY</h3>
+                            <span class="dept-category-tag">INTEGRITY &amp; DEFENSE</span>
+                            <h3 class="dept-name">CYBER &amp; SECURITY</h3>
                         </div>
                     </div>
                     <div class="dept-body">
@@ -440,7 +439,7 @@
                     </div>
                 </div>
 
-                <!-- 3. MODDER -->
+                <!-- 4. MODDER -->
                 <div class="dept-card" data-category="tech" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
@@ -476,16 +475,16 @@
                     </div>
                 </div>
 
-                <!-- 4. BADSIDE MANAGEMENT -->
-                <div class="dept-card dept-card-badside" data-category="mgmt" data-animate="fade-up">
+                <!-- 5. KREATIF -->
+                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
-                        <div class="dept-icon-box badside-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                         </div>
                         <div class="dept-title-group">
-                            <span class="dept-category-tag text-red">UNDERWORLD OVERSIGHT</span>
-                            <h3 class="dept-name">BADSIDE MANAGEMENT</h3>
+                            <span class="dept-category-tag">MEDIA &amp; CONTENT</span>
+                            <h3 class="dept-name">KREATIF</h3>
                         </div>
                     </div>
                     <div class="dept-body">
@@ -493,29 +492,75 @@
                             <div class="role-header">
                                 <span class="role-badge badge-member">ANGGOTA</span>
                             </div>
-                            <div class="member-chips member-chips-grid">
-                                <div class="member-chip tag-chip">
-                                    <span class="chip-name">ALAN</span>
-                                    <span class="chip-meta">BADSIDE &amp; HT</span>
-                                </div>
-                                <div class="member-chip tag-chip">
-                                    <span class="chip-name">DANTE</span>
-                                    <span class="chip-meta">CYBER</span>
-                                </div>
-                                <div class="member-chip tag-chip">
-                                    <span class="chip-name">SEAN</span>
-                                    <span class="chip-meta">HT</span>
-                                </div>
-                                <div class="member-chip tag-chip">
-                                    <span class="chip-name">PUTRA</span>
-                                    <span class="chip-meta">BADSIDE &amp; HT</span>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">MARSHAL</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 5. PEDAGANG -->
+                <!-- 6. DONASI -->
+                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">TREASURY &amp; SUPPORT</span>
+                            <h3 class="dept-name">DONASI</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-member">ANGGOTA</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">DAPIT</span>
+                                </div>
+                                <div class="member-chip">
+                                    <span class="chip-name">LASKAR</span>
+                                </div>
+                                <div class="member-chip">
+                                    <span class="chip-name">ELISAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. PJ BOCIL -->
+                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
+                    <div class="dept-card-glow"></div>
+                    <div class="dept-header">
+                        <div class="dept-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="dept-title-group">
+                            <span class="dept-category-tag">COMMUNITY CARE</span>
+                            <h3 class="dept-name">PJ BOCIL</h3>
+                        </div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-role-block">
+                            <div class="role-header">
+                                <span class="role-badge badge-lead">PENANGGUNG JAWAB</span>
+                            </div>
+                            <div class="member-chips">
+                                <div class="member-chip leader-chip">
+                                    <span class="chip-dot"></span>
+                                    <span class="chip-name">ELISAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. PEDAGANG -->
                 <div class="dept-card" data-category="mgmt" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
@@ -556,16 +601,16 @@
                     </div>
                 </div>
 
-                <!-- 6. DONASI -->
-                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
+                <!-- 9. BADSIDE MANAGEMENT -->
+                <div class="dept-card dept-card-badside" data-category="mgmt" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
-                        <div class="dept-icon-box">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                        <div class="dept-icon-box badside-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
                         </div>
                         <div class="dept-title-group">
-                            <span class="dept-category-tag">TREASURY &amp; SUPPORT</span>
-                            <h3 class="dept-name">DONASI</h3>
+                            <span class="dept-category-tag text-red">UNDERWORLD OVERSIGHT</span>
+                            <h3 class="dept-name">BADSIDE MANAGEMENT</h3>
                         </div>
                     </div>
                     <div class="dept-body">
@@ -573,75 +618,29 @@
                             <div class="role-header">
                                 <span class="role-badge badge-member">ANGGOTA</span>
                             </div>
-                            <div class="member-chips">
-                                <div class="member-chip">
-                                    <span class="chip-name">DAPIT</span>
+                            <div class="member-chips member-chips-grid">
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">ALAN</span>
+                                    <span class="chip-meta">BADSIDE &amp; HT</span>
                                 </div>
-                                <div class="member-chip">
-                                    <span class="chip-name">LASKAR</span>
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">DANTE</span>
+                                    <span class="chip-meta">CYBER</span>
                                 </div>
-                                <div class="member-chip">
-                                    <span class="chip-name">ELISAPI</span>
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">SEAN</span>
+                                    <span class="chip-meta">HT</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 7. KREATIF -->
-                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
-                    <div class="dept-card-glow"></div>
-                    <div class="dept-header">
-                        <div class="dept-icon-box">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-                        </div>
-                        <div class="dept-title-group">
-                            <span class="dept-category-tag">MEDIA &amp; CONTENT</span>
-                            <h3 class="dept-name">KREATIF</h3>
-                        </div>
-                    </div>
-                    <div class="dept-body">
-                        <div class="dept-role-block">
-                            <div class="role-header">
-                                <span class="role-badge badge-member">ANGGOTA</span>
-                            </div>
-                            <div class="member-chips">
-                                <div class="member-chip">
-                                    <span class="chip-name">MARSHAL</span>
+                                <div class="member-chip tag-chip">
+                                    <span class="chip-name">PUTRA</span>
+                                    <span class="chip-meta">BADSIDE &amp; HT</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 8. PJ BOCIL -->
-                <div class="dept-card" data-category="mgmt" data-animate="fade-up">
-                    <div class="dept-card-glow"></div>
-                    <div class="dept-header">
-                        <div class="dept-icon-box">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
-                        <div class="dept-title-group">
-                            <span class="dept-category-tag">COMMUNITY CARE</span>
-                            <h3 class="dept-name">PJ BOCIL</h3>
-                        </div>
-                    </div>
-                    <div class="dept-body">
-                        <div class="dept-role-block">
-                            <div class="role-header">
-                                <span class="role-badge badge-lead">PENANGGUNG JAWAB</span>
-                            </div>
-                            <div class="member-chips">
-                                <div class="member-chip leader-chip">
-                                    <span class="chip-dot"></span>
-                                    <span class="chip-name">ELISAPI</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                                <!-- 9. POLISI -->
+                <!-- 10. POLISI -->
                 <div class="dept-card dept-card-faction" data-category="faction" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
@@ -669,19 +668,16 @@
                             <div class="role-header">
                                 <span class="role-badge badge-member">ANGGOTA</span>
                             </div>
-                            <div class="member-chips member-chips-grid">
-                                <div class="member-chip"><span class="chip-name">NATHAN</span></div>
-                                <div class="member-chip"><span class="chip-name">ATONG</span></div>
-                                <div class="member-chip"><span class="chip-name">SEAN</span></div>
-                                <div class="member-chip"><span class="chip-name">YEYE</span></div>
-                                <div class="member-chip"><span class="chip-name">SUKI</span></div>
-                                <div class="member-chip"><span class="chip-name">ION</span></div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">NATHAN</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 10. MEKANIK -->
+                <!-- 11. MEKANIK -->
                 <div class="dept-card dept-card-faction" data-category="faction" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
@@ -709,22 +705,16 @@
                             <div class="role-header">
                                 <span class="role-badge badge-member">ANGGOTA</span>
                             </div>
-                            <div class="member-chips member-chips-grid">
-                                <div class="member-chip"><span class="chip-name">LASKAR</span></div>
-                                <div class="member-chip"><span class="chip-name">AXTON</span></div>
-                                <div class="member-chip"><span class="chip-name">ATA ZAHWA</span></div>
-                                <div class="member-chip"><span class="chip-name">BIGGUY</span></div>
-                                <div class="member-chip"><span class="chip-name">DEVON</span></div>
-                                <div class="member-chip"><span class="chip-name">DMZADTY</span></div>
-                                <div class="member-chip"><span class="chip-name">KOY</span></div>
-                                <div class="member-chip"><span class="chip-name">FANZO</span></div>
-                                <div class="member-chip"><span class="chip-name">KETH</span></div>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">LASKAR</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 11. EMS / MEDIS -->
+                <!-- 12. EMS -->
                 <div class="dept-card dept-card-faction" data-category="faction" data-animate="fade-up">
                     <div class="dept-card-glow"></div>
                     <div class="dept-header">
@@ -733,22 +723,18 @@
                         </div>
                         <div class="dept-title-group">
                             <span class="dept-category-tag tag-ems">MEDICAL RESPONSE</span>
-                            <h3 class="dept-name">MEDIS</h3>
+                            <h3 class="dept-name">EMS</h3>
                         </div>
                     </div>
                     <div class="dept-body">
                         <div class="dept-role-block">
                             <div class="role-header">
-                                <span class="role-badge badge-lead">PETINGGI MEDIS</span>
+                                <span class="role-badge badge-lead">KETUA / CHIEF MEDICAL</span>
                             </div>
-                            <div class="member-chips member-chips-grid">
+                            <div class="member-chips">
                                 <div class="member-chip leader-chip">
                                     <span class="chip-dot"></span>
                                     <span class="chip-name">PANPAN</span>
-                                </div>
-                                <div class="member-chip leader-chip">
-                                    <span class="chip-dot"></span>
-                                    <span class="chip-name">BAGUS</span>
                                 </div>
                             </div>
                         </div>
@@ -756,65 +742,13 @@
                             <div class="role-header">
                                 <span class="role-badge badge-member">ANGGOTA</span>
                             </div>
-                            <div class="member-chips member-chips-grid">
-                                <div class="member-chip"><span class="chip-name">NOMNOM</span></div>
-                                <div class="member-chip"><span class="chip-name">ANGELA LEE</span></div>
-                                <div class="member-chip"><span class="chip-name">ADINGUKI</span></div>
-                                <div class="member-chip"><span class="chip-name">ADITYA WIJAYA</span></div>
-                                <div class="member-chip"><span class="chip-name">CHISATO</span></div>
-                                <div class="member-chip"><span class="chip-name">DAM</span></div>
-                                <div class="member-chip"><span class="chip-name">ZARRR</span></div>
-                                <div class="member-chip"><span class="chip-name">JANUARY</span></div>
-                                <div class="member-chip"><span class="chip-name">KUPLUK</span></div>
-                                <div class="member-chip"><span class="chip-name">M0F</span></div>
-                                <div class="member-chip"><span class="chip-name">PALLKRZ</span></div>
-                                <div class="member-chip"><span class="chip-name">SHIAFI</span></div>
-                                <div class="member-chip"><span class="chip-name">ZXXY7X</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 12. RESTO -->
-                <div class="dept-card dept-card-faction" data-category="faction" data-animate="fade-up">
-                    <div class="dept-card-glow"></div>
-                    <div class="dept-header">
-                        <div class="dept-icon-box faction-resto">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-                        </div>
-                        <div class="dept-title-group">
-                            <span class="dept-category-tag tag-resto">HOSPITALITY &amp; DINING</span>
-                            <h3 class="dept-name">RESTO</h3>
-                        </div>
-                    </div>
-                    <div class="dept-body">
-                        <div class="dept-role-block">
-                            <div class="role-header">
-                                <span class="role-badge badge-lead">PETINGGI RESTO</span>
-                            </div>
-                            <div class="member-chips member-chips-grid">
-                                <div class="member-chip leader-chip">
-                                    <span class="chip-dot"></span>
-                                    <span class="chip-name">JASON</span>
+                            <div class="member-chips">
+                                <div class="member-chip">
+                                    <span class="chip-name">BAGUS</span>
                                 </div>
-                                <div class="member-chip leader-chip">
-                                    <span class="chip-dot"></span>
-                                    <span class="chip-name">MAWING</span>
+                                <div class="member-chip">
+                                    <span class="chip-name">NOMNOM</span>
                                 </div>
-                                <div class="member-chip leader-chip">
-                                    <span class="chip-dot"></span>
-                                    <span class="chip-name">SOON</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dept-role-block">
-                            <div class="role-header">
-                                <span class="role-badge badge-member">SERVERS RESTO</span>
-                            </div>
-                            <div class="member-chips member-chips-grid">
-                                <div class="member-chip"><span class="chip-name">PIYINAA</span></div>
-                                <div class="member-chip"><span class="chip-name">DARK.BITE</span></div>
-                                <div class="member-chip"><span class="chip-name">RAPT</span></div>
                             </div>
                         </div>
                     </div>

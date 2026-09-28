@@ -306,8 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetFilter = btn.getAttribute('data-filter');
 
                 deptCards.forEach(card => {
-                    const category = card.getAttribute('data-category');
-                    if (targetFilter === 'all' || category === targetFilter) {
+                    const category = card.getAttribute('data-category') || '';
+                    if (targetFilter === 'all' || category.split(' ').includes(targetFilter)) {
                         card.style.display = 'flex';
                         card.classList.add('animated');
                     } else {
