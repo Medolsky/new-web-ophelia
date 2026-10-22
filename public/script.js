@@ -646,8 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
         LOPINAZ: '284990856040153089',            // Head Admin
 
         // Developer
-        SAHABAT_KITA_SEMUA: '1112497577615691869', // Developer (Ketua)
-        RUPI_GEMBROT: '390376159696912395',       // Developer (Ketua)
+        RUPI_GEMBROT: '1112497577615691869',       // Developer (Ketua) - @rey2ru
 
         // Cyber & Security
         DANTE_CYBER: '846340165949849630',        // Cyber & Security (Ketua)
