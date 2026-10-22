@@ -23,27 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Safety fallback: hide preloader after 3.5 seconds max
     setTimeout(hidePreloader, 3500);
 
-    // ---- Cursor Glow ----
+    // ---- Cursor Glow (Clean theme: disabled) ----
     const cursorGlow = document.getElementById('cursor-glow');
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.08;
-        cursorY += (mouseY - cursorY) * 0.08;
-        cursorGlow.style.left = cursorX + 'px';
-        cursorGlow.style.top = cursorY + 'px';
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Hide cursor glow on mobile
-    if ('ontouchstart' in window) {
+    if (cursorGlow) {
         cursorGlow.style.display = 'none';
     }
 
@@ -113,9 +95,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Hero Background Slideshow ----
     const heroBg = document.getElementById('hero-bg-slideshow');
-    // Slideshow disabled when placeholder asset files are not uploaded yet
+    const heroImages = [
+        'asset/img/hero-bg.png',
+        'asset/img/bg/bg-2.png',
+        'asset/img/bg/bg-3.png'
+    ];
+    let currentHeroIndex = 0;
+
     if (heroBg) {
+        heroBg.style.backgroundImage = `url('${heroImages[0]}')`;
         heroBg.style.opacity = '1';
+
+        // Gentle cinematic crossfade between GTA V roleplay environments
+        setInterval(() => {
+            currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
+            const targetSrc = heroImages[currentHeroIndex];
+            const nextImg = new Image();
+            nextImg.onload = () => {
+                heroBg.style.opacity = '0.7';
+                setTimeout(() => {
+                    heroBg.style.backgroundImage = `url('${targetSrc}')`;
+                    heroBg.style.opacity = '1';
+                }, 400);
+            };
+            nextImg.src = targetSrc;
+        }, 12000);
     }
 
     // ---- Particles ----
