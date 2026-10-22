@@ -402,9 +402,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Show subtle loading state initially instead of flashing dummy data
         mediaGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; color: var(--text-muted);">
-                <div style="width: 24px; height: 24px; border: 2px solid rgba(255,255,255,0.1); border-top-color: #E63946; border-radius: 50%; margin: 0 auto 12px; animation: spin 0.8s linear infinite;"></div>
-                <p style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Memuat Konten...</p>
+            <div class="media-state media-state-loading">
+                <div class="media-state-spinner"></div>
+                <p class="media-state-loading-text">Memuat Konten...</p>
             </div>
         `;
 
@@ -472,8 +472,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (filtered.length === 0) {
             mediaGrid.innerHTML = `
-                <div style="grid-column: 1 / -1; text-align: center; padding: 48px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); border-radius: 16px;">
-                    <p style="color: var(--text-muted); font-size: 15px;">Belum ada konten publikasi untuk kategori ini.</p>
+                <div class="media-state media-state-empty">
+                    <p class="media-state-empty-text">Belum ada konten publikasi untuk kategori ini.</p>
                 </div>
             `;
             return;
@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.className = 'poster-card';
                 card.innerHTML = `
                     <div class="poster-img-wrap">
-                        <img src="${normalizeAssetUrl(item.imageUrl)}" alt="${item.title}" class="poster-img" loading="lazy" onerror="this.onerror=null;this.src='/asset/img/logo-3d.png';">
+                        <img src="${normalizeAssetUrl(item.imageUrl)}" alt="${item.title}" class="poster-img" loading="lazy" data-fallback="/asset/img/logo-3d.png">
                         <div class="poster-overlay">
                             <div class="poster-top-bar">
                                 <span class="media-tag">${item.category || 'EVENT'}</span>
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.className = 'article-card';
                 card.innerHTML = `
                     <div class="article-cover-wrap">
-                        <img src="${normalizeAssetUrl(item.coverUrl)}" alt="${item.title}" class="article-cover" loading="lazy" onerror="this.onerror=null;this.src='/asset/img/logo-3d.png';">
+                        <img src="${normalizeAssetUrl(item.coverUrl)}" alt="${item.title}" class="article-cover" loading="lazy" data-fallback="/asset/img/logo-3d.png">
                     </div>
                     <div class="article-body">
                         <div class="article-meta-row">

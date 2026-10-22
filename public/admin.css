@@ -1076,3 +1076,37 @@ a {
         display: none;
     }
 }
+
+/* ==========================================================================
+   CSP-SAFE UTILITIES (replacement for former inline style="" attributes)
+   ========================================================================== */
+
+.is-hidden {
+    display: none;
+}
+
+.metric-val.metric-val-md {
+    font-size: 18px;
+}
+
+.metric-val.metric-val-sm {
+    font-size: 16px;
+}
+
+.metric-val.metric-val-db {
+    color: #3ecf8e;
+}
+
+.metric-icon.metric-icon-db {
+    background: rgba(62, 207, 142, 0.15);
+    color: #3ecf8e;
+}
+
+.admin-table th.col-thumb {
+    width: 100px;
+}
+
+.admin-table th.col-actions {
+    text-align: right;
+    width: 160px;
+}

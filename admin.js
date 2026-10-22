@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         postersTableBody.innerHTML = postersData.map(poster => `
             <tr>
                 <td>
-                    <img src="${escapeHtml(poster.imageUrl)}" alt="${escapeHtml(poster.title)}" class="table-thumb" onerror="this.src='/asset/img/logo-3d.png'">
+                    <img src="${escapeHtml(poster.imageUrl)}" alt="${escapeHtml(poster.title)}" class="table-thumb" data-fallback="/asset/img/logo-3d.png">
                 </td>
                 <td>
                     <div class="table-item-title">${escapeHtml(poster.title)}</div>
@@ -401,10 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td>
                     <div class="table-actions">
-                        <button class="btn-action-icon" onclick="window.editPoster('${poster.id}')" title="Edit Poster">
+                        <button class="btn-action-icon" data-action="edit-poster" data-id="${escapeHtml(poster.id)}" title="Edit Poster">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                         </button>
-                        <button class="btn-action-icon btn-action-delete" onclick="window.deletePosterPrompt('${poster.id}')" title="Hapus Poster">
+                        <button class="btn-action-icon btn-action-delete" data-action="delete-poster" data-id="${escapeHtml(poster.id)}" title="Hapus Poster">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                         </button>
                     </div>
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
         articlesTableBody.innerHTML = articlesData.map(article => `
             <tr>
                 <td>
-                    <img src="${escapeHtml(article.coverUrl)}" alt="${escapeHtml(article.title)}" class="table-thumb" onerror="this.src='/asset/img/logo-3d.png'">
+                    <img src="${escapeHtml(article.coverUrl)}" alt="${escapeHtml(article.title)}" class="table-thumb" data-fallback="/asset/img/logo-3d.png">
                 </td>
                 <td>
                     <div class="table-item-title">${escapeHtml(article.title)}</div>
@@ -555,10 +555,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td>
                     <div class="table-actions">
-                        <button class="btn-action-icon" onclick="window.editArticle('${article.id}')" title="Edit Artikel">
+                        <button class="btn-action-icon" data-action="edit-article" data-id="${escapeHtml(article.id)}" title="Edit Artikel">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                         </button>
-                        <button class="btn-action-icon btn-action-delete" onclick="window.deleteArticlePrompt('${article.id}')" title="Hapus Artikel">
+                        <button class="btn-action-icon btn-action-delete" data-action="delete-article" data-id="${escapeHtml(article.id)}" title="Hapus Artikel">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                         </button>
                     </div>
@@ -615,6 +615,24 @@ document.addEventListener('DOMContentLoaded', () => {
         deletePromptText.innerHTML = `Apakah Anda yakin ingin menghapus artikel <strong>"${escapeHtml(article.title)}"</strong> secara permanen?`;
         openModal(modalDelete);
     };
+
+    // Delegated table row actions (CSP-safe replacement for inline onclick handlers)
+    const tableActionHandlers = {
+        'edit-poster': window.editPoster,
+        'delete-poster': window.deletePosterPrompt,
+        'edit-article': window.editArticle,
+        'delete-article': window.deleteArticlePrompt
+    };
+
+    [postersTableBody, articlesTableBody].forEach(tableBody => {
+        if (!tableBody) return;
+        tableBody.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-action]');
+            if (!btn || !tableBody.contains(btn)) return;
+            const handler = tableActionHandlers[btn.dataset.action];
+            if (handler) handler(btn.dataset.id);
+        });
+    });
 
     // Save Article Form
     formArticle.addEventListener('submit', async (e) => {

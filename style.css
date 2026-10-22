@@ -2741,3 +2741,74 @@ img {
         max-width: 650px;
     }
 }
+
+
+/* ==========================================================================
+   CSP-SAFE UTILITIES (replacement for former inline style="" attributes)
+   ========================================================================== */
+
+/* Hero title stagger index (formerly style="--i:N") */
+.char[data-i="0"] { --i: 0; }
+.char[data-i="1"] { --i: 1; }
+.char[data-i="2"] { --i: 2; }
+.char[data-i="3"] { --i: 3; }
+.char[data-i="4"] { --i: 4; }
+.char[data-i="5"] { --i: 5; }
+.char[data-i="6"] { --i: 6; }
+.char[data-i="7"] { --i: 7; }
+.char[data-i="8"] { --i: 8; }
+.char[data-i="9"] { --i: 9; }
+.char[data-i="10"] { --i: 10; }
+.char[data-i="11"] { --i: 11; }
+.char[data-i="12"] { --i: 12; }
+.char[data-i="13"] { --i: 13; }
+.char[data-i="14"] { --i: 14; }
+
+.mobile-link.mobile-link-admin {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+    padding-top: 12px;
+}
+
+.footer-link.footer-link-strong {
+    font-weight: 700;
+}
+
+/* Media grid loading & empty states */
+.media-state {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.media-state-loading {
+    padding: 48px 24px;
+    color: var(--text-muted);
+}
+
+.media-state-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #E63946;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    animation: spin 0.8s linear infinite;
+}
+
+.media-state-loading-text {
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.media-state-empty {
+    padding: 48px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-color);
+    border-radius: 16px;
+}
+
+.media-state-empty-text {
+    color: var(--text-muted);
+    font-size: 15px;
+}

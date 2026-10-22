@@ -8,12 +8,11 @@
     <meta name="description" content="Bergabunglah dengan OPHELIA ROLEPLAY - Server GTA V FiveM Roleplay terbaik dengan komunitas yang aktif dan pengalaman roleplay yang imersif.">
     <meta name="keywords" content="GTA V, FiveM, Roleplay, RP, Ophelia, Server Indonesia, GTA RP">
     <meta name="theme-color" content="#8B1A1A">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://cdn.discordapp.com https://*.discordapp.com https://*.discord.com https://i.imgur.com https://images.unsplash.com https://*.supabase.co; connect-src 'self' https://servers-frontend.fivem.net https://*.cfx.re https://frontend.cfx-services.net https://*.supabase.co; media-src 'self' data: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self';">
     <link rel="icon" type="image/png" href="/asset/img/logo-kota.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css?v=20261022_v6_csp">
+    <link rel="stylesheet" href="/style.css?v=20261022_v7_csp">
 </head>
 <body>
     <!-- Preloader -->
@@ -26,15 +25,7 @@
             <p class="preloader-text">LOADING OPHELIA ROLEPLAY...</p>
         </div>
     </div>
-    <script>
-        // Emergency preloader release: ensures the website is never stuck if script is delayed or cached
-        setTimeout(function() {
-            var pl = document.getElementById('preloader');
-            if (pl && !pl.classList.contains('hidden')) {
-                pl.classList.add('hidden');
-            }
-        }, 2800);
-    </script>
+    <script src="/boot.js?v=20261022_v7_csp"></script>
 
     <!-- Cursor Glow -->
     <div id="cursor-glow"></div>
@@ -81,7 +72,7 @@
             <a href="#media" class="mobile-link">POSTER &amp; BERITA</a>
             <a href="#team" class="mobile-link">TEAM</a>
             <a href="#join" class="mobile-link">JOIN US</a>
-            <a href="admin.html" class="mobile-link text-red" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px; padding-top: 12px;">ADMIN PANEL &rarr;</a>
+            <a href="admin.html" class="mobile-link mobile-link-admin text-red">ADMIN PANEL &rarr;</a>
             <div class="mobile-menu-actions">
                 <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="btn btn-primary">PLAY NOW</a>
             </div>
@@ -101,10 +92,10 @@
             </div>
             <h1 class="hero-title notranslate" id="hero-title" translate="no">
                 <span class="title-line">
-                    <span class="char text-red" style="--i:0">O</span><span class="char" style="--i:1">P</span><span class="char" style="--i:2">H</span><span class="char" style="--i:3">E</span><span class="char" style="--i:4">L</span><span class="char" style="--i:5">I</span><span class="char" style="--i:6">A</span>
+                    <span class="char text-red" data-i="0">O</span><span class="char" data-i="1">P</span><span class="char" data-i="2">H</span><span class="char" data-i="3">E</span><span class="char" data-i="4">L</span><span class="char" data-i="5">I</span><span class="char" data-i="6">A</span>
                 </span>
                 <span class="title-line title-line-2">
-                    <span class="char" style="--i:7">R</span><span class="char" style="--i:8">O</span><span class="char" style="--i:9">L</span><span class="char" style="--i:10">E</span><span class="char" style="--i:11">P</span><span class="char" style="--i:12">L</span><span class="char" style="--i:13">A</span><span class="char" style="--i:14">Y</span>
+                    <span class="char" data-i="7">R</span><span class="char" data-i="8">O</span><span class="char" data-i="9">L</span><span class="char" data-i="10">E</span><span class="char" data-i="11">P</span><span class="char" data-i="12">L</span><span class="char" data-i="13">A</span><span class="char" data-i="14">Y</span>
                 </span>
             </h1>
             <p class="hero-subtitle">Experience the ultimate GTA V Roleplay</p>
@@ -346,7 +337,7 @@
                         <div class="owner-avatar-wrapper">
                             <div class="owner-avatar-glow"></div>
                             <div class="owner-avatar-ring"></div>
-                            <img src="https://cdn.discordapp.com/avatars/754032322784788761/a_8c0f45c5e884aee8198a07a024a5b2a3.png" alt="Owner Saiko" class="owner-avatar" loading="lazy" onerror="this.src='/asset/img/logo-3d.png'">
+                            <img src="https://cdn.discordapp.com/avatars/754032322784788761/a_8c0f45c5e884aee8198a07a024a5b2a3.png" alt="Owner Saiko" class="owner-avatar" loading="lazy" data-fallback="/asset/img/logo-3d.png">
                             <span class="owner-status-beacon" title="Active Leadership"></span>
                         </div>
                         <div class="owner-content">
@@ -384,7 +375,7 @@
                         <div class="owner-avatar-wrapper">
                             <div class="owner-avatar-glow"></div>
                             <div class="owner-avatar-ring"></div>
-                            <img src="https://cdn.discordapp.com/avatars/284990856040153089/1167ae3973beaf82b9e6dbefb93722dd.png" alt="Head Admin Lopinaz" class="owner-avatar" loading="lazy" onerror="this.src='/asset/img/logo-kota.png'">
+                            <img src="https://cdn.discordapp.com/avatars/284990856040153089/1167ae3973beaf82b9e6dbefb93722dd.png" alt="Head Admin Lopinaz" class="owner-avatar" loading="lazy" data-fallback="/asset/img/logo-kota.png">
                             <span class="owner-status-beacon" title="Active High Command"></span>
                         </div>
                         <div class="owner-content">
@@ -443,7 +434,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/1112497577615691869" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="RUPI_GEMBROT" title="Buka Profil Discord RUPI GEMBROT (@rey2ru)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1112497577615691869/4f3738657c7eaa67b3ee39820f1d6d22.png" alt="RUPI GEMBROT" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1112497577615691869/4f3738657c7eaa67b3ee39820f1d6d22.png" alt="RUPI GEMBROT" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -480,7 +471,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/846340165949849630" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="DANTE_CYBER" title="Buka Profil Discord DANTE (@dlorente)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/846340165949849630/dd80e5561fd62278f032880c51fe517d.png" alt="DANTE" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/846340165949849630/dd80e5561fd62278f032880c51fe517d.png" alt="DANTE" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -499,7 +490,7 @@
                             </a>
                             <a href="https://discord.com/users/1177563844185432134" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="FARHAN" title="Buka Profil Discord FARHAN (@farhanrorr)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1177563844185432134/8f3bfd7d3e740be32b21390544f18cf2.png" alt="FARHAN" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1177563844185432134/8f3bfd7d3e740be32b21390544f18cf2.png" alt="FARHAN" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -518,7 +509,7 @@
                             </a>
                             <a href="https://discord.com/users/591688923030224896" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="JOSH" title="Buka Profil Discord JOSH (@lrkhsj)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/591688923030224896/356b5ca6b2228d2214028aacd1927312.png" alt="JOSH" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/591688923030224896/356b5ca6b2228d2214028aacd1927312.png" alt="JOSH" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -555,7 +546,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/473850254031323136" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="DIMAS" title="Buka Profil Discord DIMAS (@dmsaditya)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/473850254031323136/e3bd51b49507ee528188fabe31119d53.png" alt="DIMAS" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/473850254031323136/e3bd51b49507ee528188fabe31119d53.png" alt="DIMAS" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -575,7 +566,7 @@
                             </a>
                             <a href="https://discord.com/users/312492291178627074" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="DAPIT_MODDER" title="Buka Profil Discord DAPIT (@dapyt)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/312492291178627074/c1e9742845fbbeac17d2bcccc48688b5.png" alt="DAPIT" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/312492291178627074/c1e9742845fbbeac17d2bcccc48688b5.png" alt="DAPIT" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -613,7 +604,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/1047865636900053062" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="MARSHAL" title="Buka Profil Discord MARSHAL (@marshalbs)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="MARSHAL" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="MARSHAL" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -651,7 +642,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/312492291178627074" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="DAPIT_DONASI" title="Buka Profil Discord DAPIT (@dapyt)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/312492291178627074/c1e9742845fbbeac17d2bcccc48688b5.png" alt="DAPIT" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/312492291178627074/c1e9742845fbbeac17d2bcccc48688b5.png" alt="DAPIT" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -670,7 +661,7 @@
                             </a>
                             <a href="https://discord.com/users/1119754662069940356" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="LASKAR_DONASI" title="Buka Profil Discord LASKAR (@laskar_)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1119754662069940356/7689099d821d26f17a929269ac345d79.png" alt="LASKAR" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1119754662069940356/7689099d821d26f17a929269ac345d79.png" alt="LASKAR" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -689,7 +680,7 @@
                             </a>
                             <a href="https://discord.com/users/926755573205172254" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="ELISAPI_DONASI" title="Buka Profil Discord ELISAPI (@ellovettaa)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/926755573205172254/c5988e0251e7a86c923f56c739647533.png" alt="ELISAPI" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/926755573205172254/c5988e0251e7a86c923f56c739647533.png" alt="ELISAPI" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -726,7 +717,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/926755573205172254" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="ELISAPI_PJ_BOCIL" title="Buka Profil Discord ELISAPI (@ellovettaa)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/926755573205172254/c5988e0251e7a86c923f56c739647533.png" alt="ELISAPI" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/926755573205172254/c5988e0251e7a86c923f56c739647533.png" alt="ELISAPI" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -763,7 +754,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/1161004367541964910" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="PIWPIW" title="Buka Profil Discord PIWPIW (@piwpiw3030)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1161004367541964910/4f1652bcaad6299ddfebacd2bd597669.png" alt="PIWPIW" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1161004367541964910/4f1652bcaad6299ddfebacd2bd597669.png" alt="PIWPIW" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -783,7 +774,7 @@
                             </a>
                             <a href="https://discord.com/users/916514413551435806" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="MAWING" title="Buka Profil Discord MAWING (@priaidaman20)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/916514413551435806/01699dd9a1ce86ee380c715e26d76c9f.png" alt="MAWING" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/916514413551435806/01699dd9a1ce86ee380c715e26d76c9f.png" alt="MAWING" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -802,7 +793,7 @@
                             </a>
                             <a href="https://discord.com/users/944299382398939146" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="JASON" title="Buka Profil Discord JASON (@afrizall9682)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/944299382398939146/f18c94d15c26076a27e9d635450f9d7b.png" alt="JASON" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/944299382398939146/f18c94d15c26076a27e9d635450f9d7b.png" alt="JASON" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -839,7 +830,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/475367595126685706" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="ALAN" title="Buka Profil Discord ALAN (@kens24)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/475367595126685706/725581c6d24d27131d069f16c0cc4ddd.png" alt="ALAN" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/475367595126685706/725581c6d24d27131d069f16c0cc4ddd.png" alt="ALAN" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -859,7 +850,7 @@
                             </a>
                             <a href="https://discord.com/users/846340165949849630" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="DANTE_BADSIDE" title="Buka Profil Discord DANTE (@dlorente)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/846340165949849630/dd80e5561fd62278f032880c51fe517d.png" alt="DANTE" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/846340165949849630/dd80e5561fd62278f032880c51fe517d.png" alt="DANTE" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -879,7 +870,7 @@
                             </a>
                             <a href="https://discord.com/users/1446900555699196025" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="SEAN" title="Buka Profil Discord SEAN (@jibrilmpruy2)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1446900555699196025/5c5b80ef1a70b90a3d4d3ea973b6339c.png" alt="SEAN" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1446900555699196025/5c5b80ef1a70b90a3d4d3ea973b6339c.png" alt="SEAN" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -899,7 +890,7 @@
                             </a>
                             <a href="https://discord.com/users/1454680863269847301" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="PUTRA" title="Buka Profil Discord PUTRA (@scatride0011)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/embed/avatars/5.png" alt="PUTRA" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/embed/avatars/5.png" alt="PUTRA" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -937,7 +928,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/983237484236374057" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="NASAA" title="Buka Profil Discord NASAA (@athaa00)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/983237484236374057/918bf5b1fc76268b263887b4c2ad046b.png" alt="NASAA" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/983237484236374057/918bf5b1fc76268b263887b4c2ad046b.png" alt="NASAA" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -956,7 +947,7 @@
                             </a>
                             <a href="https://discord.com/users/1036237050594209902" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="NATHAN" title="Buka Profil Discord NATHAN (@chainmokers)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="NATHAN" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="NATHAN" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -993,7 +984,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/1196333014368661514" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="REYY" title="Buka Profil Discord REYY (@kenn05507)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1196333014368661514/861b57f5c380534b9f8ff820f79f5232.png" alt="REYY" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1196333014368661514/861b57f5c380534b9f8ff820f79f5232.png" alt="REYY" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -1012,7 +1003,7 @@
                             </a>
                             <a href="https://discord.com/users/1119754662069940356" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="LASKAR_MEKANIK" title="Buka Profil Discord LASKAR (@laskar_)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1119754662069940356/7689099d821d26f17a929269ac345d79.png" alt="LASKAR" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1119754662069940356/7689099d821d26f17a929269ac345d79.png" alt="LASKAR" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -1049,7 +1040,7 @@
                         <div class="dept-members-grid">
                             <a href="https://discord.com/users/715746033354801195" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="PANPAN" title="Buka Profil Discord PANPAN (@panpaq)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/715746033354801195/b8475f0c3abef3e292975cc644922471.png" alt="PANPAN" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/715746033354801195/b8475f0c3abef3e292975cc644922471.png" alt="PANPAN" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -1068,7 +1059,7 @@
                             </a>
                             <a href="https://discord.com/users/390376159696912395" target="_blank" rel="noopener noreferrer" class="member-discord-card card-lead" data-discord-user="BAGUS" title="Buka Profil Discord BAGUS (@rapi0853)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/390376159696912395/f53497e40bb8e89b8dd4c30924a5fc91.png" alt="BAGUS" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/390376159696912395/f53497e40bb8e89b8dd4c30924a5fc91.png" alt="BAGUS" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -1087,7 +1078,7 @@
                             </a>
                             <a href="https://discord.com/users/1229337749652242503" target="_blank" rel="noopener noreferrer" class="member-discord-card" data-discord-user="NOMNOM" title="Buka Profil Discord NOMNOM (@nathanpinatkentang)">
                                 <div class="member-avatar-box">
-                                    <img src="https://cdn.discordapp.com/avatars/1229337749652242503/0cbc020b7ee87a8170978109f68467a4.png" alt="NOMNOM" class="member-avatar-img" loading="lazy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                                    <img src="https://cdn.discordapp.com/avatars/1229337749652242503/0cbc020b7ee87a8170978109f68467a4.png" alt="NOMNOM" class="member-avatar-img" loading="lazy" data-fallback="https://cdn.discordapp.com/embed/avatars/0.png">
                                     <span class="member-status-beacon" title="Discord Profile"></span>
                                 </div>
                                 <div class="member-info">
@@ -1165,7 +1156,7 @@
                     <a href="https://cfx.re/join/zjjmbx5" target="_blank" class="footer-link">FiveM Server</a>
                     <a href="https://discord.gg/opheliarp" target="_blank" class="footer-link">Discord</a>
                     <a href="https://ophelia.tebex.io/" target="_blank" class="footer-link">Tebex Store</a>
-                    <a href="/admin.html" class="footer-link text-red" style="font-weight: 700;">Admin Dashboard &rarr;</a>
+                    <a href="/admin.html" class="footer-link footer-link-strong text-red">Admin Dashboard &rarr;</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1179,6 +1170,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=20261022_v6_csp"></script>
+    <script src="/script.js?v=20261022_v7_csp"></script>
 </body>
 </html>

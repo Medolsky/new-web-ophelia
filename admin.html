@@ -5,12 +5,11 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Control Panel | OPHELIA ROLEPLAY</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://cdn.discordapp.com https://*.discordapp.com https://*.discord.com https://i.imgur.com https://images.unsplash.com https://*.supabase.co; connect-src 'self' https://servers-frontend.fivem.net https://*.cfx.re https://frontend.cfx-services.net https://*.supabase.co; media-src 'self' data: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self';">
     <link rel="icon" type="image/png" href="/asset/img/logo-kota.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/admin.css">
+    <link rel="stylesheet" href="/admin.css?v=20261022_v7_csp">
 </head>
 <body>
 
@@ -55,7 +54,7 @@
     </div>
 
     <!-- Admin Dashboard (Protected) -->
-    <div id="admin-dashboard" class="dashboard-wrapper" style="display: none;">
+    <div id="admin-dashboard" class="dashboard-wrapper is-hidden">
         <!-- Top Navigation -->
         <header class="admin-topbar">
             <div class="admin-container topbar-content">
@@ -108,16 +107,16 @@
                     </div>
                     <div class="metric-info">
                         <span class="metric-label">CFX FIVEM STATUS</span>
-                        <h2 class="metric-val text-green" id="admin-server-status" style="font-size: 18px;">MEMUAT...</h2>
+                        <h2 class="metric-val metric-val-md text-green" id="admin-server-status">MEMUAT...</h2>
                     </div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-icon" style="background: rgba(62, 207, 142, 0.15); color: #3ecf8e;">
+                    <div class="metric-icon metric-icon-db">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
                     </div>
                     <div class="metric-info">
                         <span class="metric-label">DATABASE &amp; STORAGE</span>
-                        <h2 class="metric-val" id="admin-db-status" style="font-size: 16px; color: #3ecf8e;">MEMUAT...</h2>
+                        <h2 class="metric-val metric-val-sm metric-val-db" id="admin-db-status">MEMUAT...</h2>
                     </div>
                 </div>
             </section>
@@ -151,11 +150,11 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th style="width: 100px;">Preview</th>
+                                <th class="col-thumb">Preview</th>
                                 <th>Judul Poster</th>
                                 <th>Kategori</th>
                                 <th>Tanggal Upload</th>
-                                <th style="text-align: right; width: 160px;">Aksi</th>
+                                <th class="col-actions">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="posters-table-body">
@@ -182,12 +181,12 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th style="width: 100px;">Cover</th>
+                                <th class="col-thumb">Cover</th>
                                 <th>Judul Artikel</th>
                                 <th>Kategori</th>
                                 <th>Penulis</th>
                                 <th>Tanggal Rilis</th>
-                                <th style="text-align: right; width: 160px;">Aksi</th>
+                                <th class="col-actions">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="articles-table-body">
@@ -238,7 +237,7 @@
                             <small id="poster-file-name" class="text-muted">Maksimal 15MB</small>
                         </div>
                     </div>
-                    <div id="poster-preview-box" class="image-preview-box" style="display: none;">
+                    <div id="poster-preview-box" class="image-preview-box is-hidden">
                         <img id="poster-preview-img" src="" alt="Preview">
                         <button type="button" class="btn-remove-preview" id="poster-remove-preview">&times;</button>
                     </div>
@@ -305,7 +304,7 @@
                             <small id="article-file-name" class="text-muted">Maksimal 15MB</small>
                         </div>
                     </div>
-                    <div id="article-preview-box" class="image-preview-box" style="display: none;">
+                    <div id="article-preview-box" class="image-preview-box is-hidden">
                         <img id="article-preview-img" src="" alt="Preview">
                         <button type="button" class="btn-remove-preview" id="article-remove-preview">&times;</button>
                     </div>
@@ -352,6 +351,7 @@
         </div>
     </div>
 
-    <script src="/admin.js"></script>
+    <script src="/boot.js?v=20261022_v7_csp"></script>
+    <script src="/admin.js?v=20261022_v7_csp"></script>
 </body>
 </html>
