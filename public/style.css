@@ -1641,6 +1641,49 @@ body:hover #cursor-glow {
     color: #D1D5DB;
 }
 
+.owner-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.owner-discord-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(88, 101, 242, 0.22), rgba(88, 101, 242, 0.08));
+    border: 1px solid rgba(88, 101, 242, 0.38);
+    border-radius: 8px;
+    color: #E0E7FF;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(88, 101, 242, 0.15);
+}
+
+.owner-discord-btn:hover {
+    background: linear-gradient(135deg, rgba(88, 101, 242, 0.38), rgba(88, 101, 242, 0.18));
+    border-color: rgba(88, 101, 242, 0.65);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(88, 101, 242, 0.32);
+}
+
+.owner-discord-btn svg {
+    color: #5865F2;
+    transition: transform 0.25s ease;
+}
+
+.owner-discord-btn:hover svg {
+    transform: scale(1.12);
+}
+
 /* Category Filter Bar */
 .team-filter-bar {
     display: flex;
@@ -1903,12 +1946,32 @@ body:hover #cursor-glow {
     border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 8px;
     transition: all 0.25s ease;
+    text-decoration: none;
+    color: inherit;
 }
 
 .member-chip:hover {
     background: rgba(255, 255, 255, 0.07);
     border-color: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
+    text-decoration: none;
+    color: inherit;
+}
+
+.chip-discord-icon {
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.28);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.member-chip:hover .chip-discord-icon {
+    color: #5865F2;
+    transform: scale(1.15);
+}
+
+.member-chip.leader-chip:hover .chip-discord-icon {
+    color: #F87171;
 }
 
 .member-chip.leader-chip {
@@ -1978,6 +2041,10 @@ body:hover #cursor-glow {
     }
 
     .owner-tags {
+        justify-content: center;
+    }
+
+    .owner-actions {
         justify-content: center;
     }
 

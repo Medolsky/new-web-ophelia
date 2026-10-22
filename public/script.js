@@ -626,6 +626,124 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMediaContent();
 
+    /* =========================================================================
+       MANAGEMENT DISCORD PROFILES CONFIGURATION
+       -------------------------------------------------------------------------
+       Masukkan Discord User ID (angka unik) atau Discord profile/invite link.
+       Contoh ID: '345678901234567890' -> otomatis membuka https://discord.com/users/345678901234567890
+       Jika dibiarkan kosong (''), tombol tetap memiliki fallback link atau bisa diisi nanti.
+       ========================================================================= */
+    const MANAGEMENT_DISCORD_IDS = {
+        // High Command
+        SAIKO: '',               // Founder & Server Director
+        LOPINAZ: '',             // Head Admin
+
+        // Developer
+        SAHABAT_KITA_SEMUA: '',  // Developer (Ketua)
+        RUPI_GEMBROT: '',        // Developer (Ketua)
+
+        // Cyber & Security
+        DANTE_CYBER: '',         // Cyber & Security (Ketua)
+        FARHAN: '',              // Cyber & Security (Anggota)
+        JOSH: '',                // Cyber & Security (Anggota)
+
+        // Modder
+        DIMAS: '',               // Modder - Ped / Clothing
+        DAPIT_MODDER: '',        // Modder - Kendaraan / Handling
+
+        // Kreatif
+        MARSHAL: '',             // Kreatif (Anggota)
+
+        // Donasi
+        DAPIT_DONASI: '',        // Donasi (Anggota)
+        LASKAR_DONASI: '',       // Donasi (Anggota)
+        ELISAPI_DONASI: '',      // Donasi (Anggota)
+
+        // PJ Bocil
+        ELISAPI_PJ_BOCIL: '',    // PJ Bocil (Penanggung Jawab)
+
+        // Pedagang
+        PIWPIW: '',              // Pedagang (Ketua - Zara)
+        MAWING: '',              // Pedagang (Anggota)
+        JASON: '',               // Pedagang (Anggota)
+
+        // Badside Management
+        ALAN: '',                // Badside (Badside & HT)
+        DANTE_BADSIDE: '',       // Badside (Cyber)
+        SEAN: '',                // Badside (HT)
+        PUTRA: '',               // Badside (Badside & HT)
+
+        // Instansi: Polisi
+        NASAA: '',               // Polisi (Ketua / Chief)
+        NATHAN: '',              // Polisi (Anggota)
+
+        // Instansi: Mekanik
+        REYY: '',                // Mekanik (Ketua / Head Mechanic)
+        LASKAR_MEKANIK: '',      // Mekanik (Anggota)
+
+        // Instansi: EMS
+        PANPAN: '',              // EMS (Ketua / Chief Medical)
+        BAGUS: '',               // EMS (Anggota)
+        NOMNOM: ''               // EMS (Anggota)
+    };
+
+    function applyManagementDiscordLinks() {
+        const discordElements = document.querySelectorAll('[data-discord-user]');
+        discordElements.forEach(el => {
+            const key = el.getAttribute('data-discord-user');
+            if (!key) return;
+
+            // Check if key is configured, fallback to base name (e.g. DAPIT for DAPIT_MODDER if user set DAPIT)
+            const baseName = key.split('_')[0];
+            const rawVal = MANAGEMENT_DISCORD_IDS[key] || MANAGEMENT_DISCORD_IDS[baseName] || '';
+            const trimmed = String(rawVal).trim();
+
+            if (!trimmed) return;
+
+            let profileUrl = '';
+            if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+                profileUrl = trimmed;
+            } else if (/^\d+$/.test(trimmed)) {
+                // Discord Snowflake User ID format
+                profileUrl = `https://discord.com/users/${trimmed}`;
+            } else {
+                profileUrl = `https://discord.com/users/${trimmed}`;
+            }
+
+            el.setAttribute('href', profileUrl);
+        });
+    }
+
+    applyManagementDiscordLinks();
+
+    // Expose config to window for quick console debugging or runtime modification
+    window.OPHELIA_MANAGEMENT_DISCORD = MANAGEMENT_DISCORD_IDS;
+    window.reloadManagementDiscordLinks = applyManagementDiscordLinks;
+
+    // ---- Management Team Category Filter ----
+    const teamFilterBtns = document.querySelectorAll('.team-filter-btn');
+    const deptCards = document.querySelectorAll('.dept-card');
+
+    if (teamFilterBtns.length > 0 && deptCards.length > 0) {
+        teamFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter') || 'all';
+
+                teamFilterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                deptCards.forEach(card => {
+                    const cardCat = card.getAttribute('data-category');
+                    if (filter === 'all' || cardCat === filter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
     console.log('%c OPHELIA ROLEPLAY ', 'background: #B91C1C; color: white; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 4px;');
     console.log('%c Website by Ophelia Dev Team ', 'color: #A3A3A3; font-size: 12px;');
 });
