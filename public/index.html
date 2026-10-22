@@ -10,8 +10,8 @@
     <link rel="icon" type="image/png" href="asset/img/logo-kota.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261022_v1">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260928_v7">
 </head>
 <body>
     <!-- Preloader -->
@@ -80,40 +80,41 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-bg">
-            <div class="hero-slide-layer active zooming" id="hero-slide-layer-a"></div>
-            <div class="hero-slide-layer" id="hero-slide-layer-b"></div>
+            <div class="hero-bg-image" id="hero-bg-slideshow"></div>
             <div class="hero-overlay"></div>
             <div class="hero-particles" id="particles"></div>
         </div>
         <div class="hero-content">
-            <div class="hero-badge">
-                <span class="hero-badge-tag">SEASON 2026</span>
-                <span class="hero-badge-sep">&bull;</span>
-                <span class="hero-badge-sub">INDONESIA FIVEM ROLEPLAY</span>
+            <div class="hero-logo-3d">
+                <img src="asset/img/logo-3d.png" alt="Ophelia 3D Logo" class="logo-3d-img">
             </div>
             <h1 class="hero-title" id="hero-title">
-                <span class="title-line">OPHELIA</span>
-                <span class="title-line title-line-2"><span class="text-red">ROLEPLAY</span></span>
+                <span class="title-line">
+                    <span class="char text-red" style="--i:0">O</span><span class="char" style="--i:1">P</span><span class="char" style="--i:2">H</span><span class="char" style="--i:3">E</span><span class="char" style="--i:4">L</span><span class="char" style="--i:5">I</span><span class="char" style="--i:6">A</span>
+                </span>
+                <span class="title-line title-line-2">
+                    <span class="char" style="--i:7">R</span><span class="char" style="--i:8">O</span><span class="char" style="--i:9">L</span><span class="char" style="--i:10">E</span><span class="char" style="--i:11">P</span><span class="char" style="--i:12">L</span><span class="char" style="--i:13">A</span><span class="char" style="--i:14">Y</span>
+                </span>
             </h1>
-            <p class="hero-subtitle">Server FiveM Indonesia dengan standar roleplay imersif, arsitektur ekonomi stabil, custom handling balap motorsport, dan integritas komunitas tanpa kompromi.</p>
+            <p class="hero-subtitle">Experience the ultimate GTA V Roleplay</p>
             <div class="hero-live-indicator" id="hero-live-indicator">
                 <span class="status-pulse-dot" id="hero-status-dot"></span>
                 <span class="hero-live-text" id="hero-live-text">CFX SERVER ONLINE &bull; 0 / 1000 PLAYERS</span>
             </div>
-            <div class="hero-status-pills">
-                <div class="hero-pill">
-                    <span class="pill-label">STATUS</span>
-                    <span class="pill-val text-green" id="hero-pill-status">ONLINE</span>
+            <div class="hero-stats">
+                <div class="stat-item" id="hero-stat-players">
+                    <span class="stat-number stat-no-plus" id="live-player-count" data-target="0">0</span>
+                    <span class="stat-label">PLAYERS ONLINE</span>
                 </div>
-                <div class="hero-pill-divider"></div>
-                <div class="hero-pill">
-                    <span class="pill-label">ACTIVE PLAYERS</span>
-                    <span class="pill-val" id="live-player-count" data-target="0">0</span>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="24">0</span>
+                    <span class="stat-label">HOURS UPTIME</span>
                 </div>
-                <div class="hero-pill-divider"></div>
-                <div class="hero-pill">
-                    <span class="pill-label">CONNECT CODE</span>
-                    <code class="pill-code">cfx.re/join/zjjmbx5</code>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="50">0</span>
+                    <span class="stat-label">CUSTOM JOBS</span>
                 </div>
             </div>
             <div class="hero-cta">
@@ -125,19 +126,6 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
                     JOIN DISCORD
                 </a>
-            </div>
-        </div>
-        <!-- Slideshow Controls -->
-        <div class="hero-slideshow-controls" id="hero-slideshow-controls" aria-label="Background Controls">
-            <button class="hero-slide-btn" id="hero-prev-btn" aria-label="Previous Background">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <div class="hero-slide-dots" id="hero-slide-dots"></div>
-            <button class="hero-slide-btn" id="hero-next-btn" aria-label="Next Background">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
-            <div class="hero-slide-counter">
-                <span id="hero-slide-current">01</span>/<span id="hero-slide-total">07</span>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -202,97 +190,58 @@
         </div>
     </section>
 
+
     <!-- Features Section -->
     <section id="features" class="section features">
         <div class="section-bg-pattern"></div>
         <div class="container">
             <div class="section-header" data-animate="fade-up">
-                <span class="section-tag">SERVER ARCHITECTURE &amp; SYSTEMS</span>
-                <h2 class="section-title">ENGINEERED FOR <span class="text-red">PERFORMANCE</span></h2>
+                <span class="section-tag">FEATURES</span>
+                <h2 class="section-title">WHY <span class="text-red">OPHELIA</span>?</h2>
                 <div class="section-line"></div>
-                <p class="section-desc">Infrastruktur dan mekanik yang dirancang khusus untuk stabilitas permainan, keadilan aturan, dan alur roleplay yang dinamis.</p>
             </div>
-            <div class="features-bento" data-animate="fade-up">
-                <!-- Bento 1: Custom Framework (Spans 2 cols on desktop) -->
-                <div class="bento-card bento-card-wide">
-                    <div class="bento-card-glow"></div>
-                    <div class="bento-badge-row">
-                        <span class="bento-badge">CORE INFRASTRUCTURE</span>
-                        <span class="bento-meta">64-BIT DEDICATED SYNC</span>
+            <div class="features-grid">
+                <div class="feature-card" data-animate="fade-up" data-delay="0">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                     </div>
-                    <div class="bento-icon-title">
-                        <div class="bento-icon">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                        </div>
-                        <h3 class="bento-title">High-Tick Custom Framework</h3>
-                    </div>
-                    <p class="bento-desc">Arsitektur server dioptimalkan khusus untuk memastikan latensi minimal, sinkronisasi physics, netcode kendaraan motorsport, serta voice proximity tanpa distorsi bahkan dalam situasi padat warga.</p>
-                    <div class="bento-specs">
-                        <div class="spec-item"><span class="spec-dot"></span> Low Latency Netcode</div>
-                        <div class="spec-item"><span class="spec-dot"></span> Optimized Entity Streaming</div>
-                        <div class="spec-item"><span class="spec-dot"></span> Smooth Physics Sync</div>
-                    </div>
+                    <h3 class="feature-title">Custom Framework</h3>
+                    <p class="feature-desc">Framework yang dioptimalkan untuk performa terbaik dengan fitur-fitur roleplay yang lengkap dan realistis.</p>
                 </div>
-
-                <!-- Bento 2: Bespoke Scripts -->
-                <div class="bento-card">
-                    <div class="bento-card-glow"></div>
-                    <div class="bento-badge-row">
-                        <span class="bento-badge">MECHANICS</span>
+                <div class="feature-card" data-animate="fade-up" data-delay="100">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                     </div>
-                    <div class="bento-icon-title">
-                        <div class="bento-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                        </div>
-                        <h3 class="bento-title">Bespoke Scripts &amp; Jobs</h3>
-                    </div>
-                    <p class="bento-desc">Ragam pekerjaan sipil bersertifikasi (medis, penegak hukum, bengkel kustom, logistik) hingga ekosistem underworld tersembunyi dengan storyline dinamis.</p>
+                    <h3 class="feature-title">Custom Scripts</h3>
+                    <p class="feature-desc">Script-script eksklusif yang hanya tersedia di Ophelia, memberikan pengalaman bermain yang unik.</p>
                 </div>
-
-                <!-- Bento 3: Anti-Cheat & Fair Play -->
-                <div class="bento-card">
-                    <div class="bento-card-glow"></div>
-                    <div class="bento-badge-row">
-                        <span class="bento-badge">SECURITY</span>
+                <div class="feature-card" data-animate="fade-up" data-delay="200">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
                     </div>
-                    <div class="bento-icon-title">
-                        <div class="bento-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
-                        <h3 class="bento-title">Server-Side Integrity</h3>
-                    </div>
-                    <p class="bento-desc">Pertahanan multi-lapis aktif untuk mencegah injeksi dan manipulasi memori, didukung tim Cyber Security &amp; Admin aktif 24 jam untuk menjamin fair-play.</p>
+                    <h3 class="feature-title">Active Community</h3>
+                    <p class="feature-desc">Komunitas yang aktif dan ramah dengan admin dan staff yang selalu siap membantu pemain.</p>
                 </div>
-
-                <!-- Bento 4: Dynamic Economy -->
-                <div class="bento-card">
-                    <div class="bento-card-glow"></div>
-                    <div class="bento-badge-row">
-                        <span class="bento-badge">ECONOMY</span>
+                <div class="feature-card" data-animate="fade-up" data-delay="300">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
                     </div>
-                    <div class="bento-icon-title">
-                        <div class="bento-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
-                        </div>
-                        <h3 class="bento-title">Living Market Economy</h3>
-                    </div>
-                    <p class="bento-desc">Sirkulasi mata uang terukur dengan regulasi pasar, perpajakan bisnis, lisensi komersial, dan pasar properti yang mencegah hiperinflasi.</p>
+                    <h3 class="feature-title">Regular Updates</h3>
+                    <p class="feature-desc">Update rutin dengan konten baru, bug fixes, dan peningkatan performa secara berkala.</p>
                 </div>
-
-                <!-- Bento 5: Community & Weekly Updates (Spans 2 cols on desktop) -->
-                <div class="bento-card bento-card-wide">
-                    <div class="bento-card-glow"></div>
-                    <div class="bento-badge-row">
-                        <span class="bento-badge">EVOLUTION</span>
-                        <span class="bento-meta">WEEKLY CHANGELOGS</span>
+                <div class="feature-card" data-animate="fade-up" data-delay="400">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
-                    <div class="bento-icon-title">
-                        <div class="bento-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-                        </div>
-                        <h3 class="bento-title">Continuous Evolution &amp; Event Seasons</h3>
+                    <h3 class="feature-title">Anti-Cheat</h3>
+                    <p class="feature-desc">Sistem anti-cheat canggih untuk menjaga fair play dan keamanan server dari cheater.</p>
+                </div>
+                <div class="feature-card" data-animate="fade-up" data-delay="500">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                     </div>
-                    <p class="bento-desc">Pembaruan berkala berbasis masukan warga, event balap motorsport, festival kota, dan penegakan alur cerita jangka panjang demi menjaga pengalaman bermain selalu segar dan menantang.</p>
+                    <h3 class="feature-title">Economy System</h3>
+                    <p class="feature-desc">Sistem ekonomi yang seimbang dengan berbagai pekerjaan dan bisnis untuk dikembangkan.</p>
                 </div>
             </div>
         </div>
@@ -300,7 +249,6 @@
 
     <!-- Media Section (Posters & Articles) -->
     <section id="media" class="section media-section">
-        <div class="section-bg-pattern"></div>
         <div class="container">
             <div class="section-header" data-animate="fade-up">
                 <span class="section-tag">PUBLIKASI KOTA</span>
