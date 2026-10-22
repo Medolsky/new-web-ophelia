@@ -96,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Hero Background Slideshow ----
     const heroBg = document.getElementById('hero-bg-slideshow');
     const heroImages = [
-        'asset/img/hero-bg.png',
-        'asset/img/bg/bg-2.png',
-        'asset/img/bg/bg-3.png'
+        '/asset/img/hero-bg.png',
+        '/asset/img/bg/bg-2.png',
+        '/asset/img/bg/bg-3.png'
     ];
     let currentHeroIndex = 0;
 
@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'poster_1',
             title: 'Grand Launching Ophelia City',
             description: 'Poster resmi peresmian kota Ophelia Roleplay dengan sistem custom dan ekonomi stabil.',
-            imageUrl: 'asset/img/logo-3d.png',
+            imageUrl: '/asset/img/logo-3d.png',
             category: 'EVENT',
             createdAt: '2026-09-25T02:37:59.788Z'
         },
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'poster_2',
             title: 'Open Recruitment: Polisi & EMS',
             description: 'Pendaftaran terbuka instansi kepolisian dan medis kota Ophelia Roleplay.',
-            imageUrl: 'asset/img/logo-kota.png',
+            imageUrl: '/asset/img/logo-kota.png',
             category: 'RECRUITMENT',
             createdAt: '2026-09-26T02:37:59.788Z'
         },
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'poster_3',
             title: 'Car Meet & Drift Championship',
             description: 'Kompetisi modifikasi mobil dan adu kecepatan di Los Santos Airport.',
-            imageUrl: 'asset/img/logo-3d.png',
+            imageUrl: '/asset/img/logo-3d.png',
             category: 'COMMUNITY',
             createdAt: '2026-09-27T02:37:59.788Z'
         }
@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Pembaruan Fitur Framework v2.4 & Optimalisasi FPS Kota',
             category: 'PATCH NOTES',
             author: 'Developer Team',
-            coverUrl: 'asset/img/logo-3d.png',
+            coverUrl: '/asset/img/logo-3d.png',
             excerpt: 'Simak rangkuman pembaharuan script custom pekerjaan, optimalisasi handling mobil, dan peningkatan kestabilan server.',
             content: 'Warga Ophelia Roleplay yang terhormat,\n\nKami dengan bangga merilis pembaruan v2.4 yang difokuskan pada peningkatan performa dan kenyamanan bermain:\n\n1. Optimalisasi Script Core: Pengurangan lag spike dan latensi FiveM hingga 35%.\n2. Modifikasi Kendaraan: Penyeimbangan handling mobil sport, SUV dinas kepolisian, dan ambulans.\n3. Fitur Pekerjaan Baru: Penambahan variasi pekerjaan legal dan perluasan interaksi pedagang pasar.\n4. Sistem Keamanan Kota: Pengetatan integrasi Anti-Cheat dan proteksi cyber kota.\n\nSelamat menikmati petualangan roleplay yang lebih imersif dan kompetitif di Ophelia!',
             createdAt: '2026-09-25T02:37:59.788Z'
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Panduan Menjadi Warga Baru & Aturan Roleplay Ophelia',
             category: 'GUIDE',
             author: 'Head Admin',
-            coverUrl: 'asset/img/logo-kota.png',
+            coverUrl: '/asset/img/logo-kota.png',
             excerpt: 'Panduan lengkap seputar etika roleplay, istilah penting (FailRP, VDM, RDM), dan tata tertib hidup di kota Ophelia.',
             content: 'Bagi seluruh pendatang baru di Ophelia Roleplay, perhatikan prinsip utama dalam menjaga kualitas cerita roleplay bersama:\n\n- Hormati Value of Life: Selalu hargai nyawa karakter Anda dalam setiap skenario kejahatan maupun kecelakaan.\n- No Random Death Match (RDM) & Vehicle Death Match (VDM): Dilarang melukai atau menabrak warga tanpa latar belakang roleplay yang jelas.\n- Menghormati Instansi: Hormati petugas kepolisian dan paramedis saat bertugas di TKP.\n\nCiptakan jalan cerita yang unik dan bangun reputasi karaktermu bersama komunitas kami!',
             createdAt: '2026-09-26T02:37:59.788Z'
@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Event Komunitas: Turnamen Underground & Pasar Malam',
             category: 'EVENT',
             author: 'Kreatif Team',
-            coverUrl: 'asset/img/logo-3d.png',
+            coverUrl: '/asset/img/logo-3d.png',
             excerpt: 'Bersiaplah untuk festival akhir pekan dengan hadiah ratusan juta rupiah uang in-game dan gelar juara kota.',
             content: 'Malam minggu ini Ophelia akan menggelar rangkaian event meriah:\n\n- Drag Race Championship di runway Sandy Shores.\n- Bazar Pedagang Kaki Lima di pusat kota dengan diskon makanan & merchandise khusus.\n- Konser musik live di Diamond Casino Roof.\n\nPastikan Anda mendaftarkan tim dan kendaraan terbaik Anda melalui Discord resmi Ophelia Roleplay!',
             createdAt: '2026-09-27T02:37:59.788Z'
@@ -451,6 +451,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function normalizeAssetUrl(url) {
+        if (!url || typeof url !== 'string') return '/asset/img/logo-3d.png';
+        const trimmed = url.trim();
+        if (!trimmed) return '/asset/img/logo-3d.png';
+        if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('data:') || trimmed.startsWith('blob:')) {
+            return trimmed;
+        }
+        if (trimmed.startsWith('/')) {
+            return trimmed;
+        }
+        return '/' + trimmed;
+    }
+
     function renderMediaGrid(filter) {
         if (!mediaGrid) return;
         mediaGrid.innerHTML = '';
@@ -472,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.className = 'poster-card';
                 card.innerHTML = `
                     <div class="poster-img-wrap">
-                        <img src="${item.imageUrl || 'asset/img/logo-3d.png'}" alt="${item.title}" class="poster-img" loading="lazy" onerror="this.onerror=null;this.src='asset/img/logo-3d.png';">
+                        <img src="${normalizeAssetUrl(item.imageUrl)}" alt="${item.title}" class="poster-img" loading="lazy" onerror="this.onerror=null;this.src='/asset/img/logo-3d.png';">
                         <div class="poster-overlay">
                             <div class="poster-top-bar">
                                 <span class="media-tag">${item.category || 'EVENT'}</span>
@@ -494,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.className = 'article-card';
                 card.innerHTML = `
                     <div class="article-cover-wrap">
-                        <img src="${item.coverUrl || 'asset/img/logo-3d.png'}" alt="${item.title}" class="article-cover" loading="lazy" onerror="this.onerror=null;this.src='asset/img/logo-3d.png';">
+                        <img src="${normalizeAssetUrl(item.coverUrl)}" alt="${item.title}" class="article-cover" loading="lazy" onerror="this.onerror=null;this.src='/asset/img/logo-3d.png';">
                     </div>
                     <div class="article-body">
                         <div class="article-meta-row">
@@ -530,8 +543,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function openPosterModal(poster) {
         if (!posterModal) return;
         const posterImg = document.getElementById('poster-modal-img');
-        posterImg.onerror = function() { this.src = 'asset/img/logo-3d.png'; };
-        posterImg.src = poster.imageUrl || 'asset/img/logo-3d.png';
+        posterImg.onerror = function() { this.src = '/asset/img/logo-3d.png'; };
+        posterImg.src = normalizeAssetUrl(poster.imageUrl);
         document.getElementById('poster-modal-tag').textContent = poster.category || 'EVENT';
         document.getElementById('poster-modal-title').textContent = poster.title;
         document.getElementById('poster-modal-desc').textContent = poster.description || '';
@@ -556,8 +569,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('article-modal-author').textContent = article.author ? `Penulis: ${article.author}` : '';
         document.getElementById('article-modal-title').textContent = article.title;
         const articleCover = document.getElementById('article-modal-cover');
-        articleCover.onerror = function() { this.src = 'asset/img/logo-3d.png'; };
-        articleCover.src = article.coverUrl || 'asset/img/logo-3d.png';
+        articleCover.onerror = function() { this.src = '/asset/img/logo-3d.png'; };
+        articleCover.src = normalizeAssetUrl(article.coverUrl);
         document.getElementById('article-modal-body').textContent = article.content || article.excerpt || '';
 
         articleModal.classList.add('active');

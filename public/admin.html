@@ -2,13 +2,15 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Control Panel | OPHELIA ROLEPLAY</title>
-    <link rel="icon" type="image/png" href="asset/img/logo-kota.png">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://cdn.discordapp.com https://*.discordapp.com https://*.discord.com https://i.imgur.com https://images.unsplash.com https://*.supabase.co; connect-src 'self' https://servers-frontend.fivem.net https://*.cfx.re https://frontend.cfx-services.net https://*.supabase.co; media-src 'self' data: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <link rel="icon" type="image/png" href="/asset/img/logo-kota.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="/admin.css">
 </head>
 <body>
 
@@ -19,7 +21,7 @@
     <div id="login-screen" class="login-wrapper">
         <div class="login-card">
             <div class="login-header">
-                <img src="asset/img/logo-3d.png" alt="Ophelia Logo" class="login-logo">
+                <img src="/asset/img/logo-3d.png" alt="Ophelia Logo" class="login-logo">
                 <h1 class="login-title">OPHELIA <span class="text-red">ADMIN</span></h1>
                 <p class="login-sub">Portal Manajemen Konten Poster &amp; Artikel Resmi</p>
             </div>
@@ -58,11 +60,11 @@
         <header class="admin-topbar">
             <div class="admin-container topbar-content">
                 <div class="topbar-brand">
-                    <img src="asset/img/logo-kota.png" alt="Ophelia Logo" class="topbar-logo">
+                    <img src="/asset/img/logo-kota.png" alt="Ophelia Logo" class="topbar-logo">
                     <span class="topbar-title"><span class="text-red">O</span>PHELIA <small>ADMIN PANEL</small></span>
                 </div>
                 <div class="topbar-actions">
-                    <a href="index.html" target="_blank" class="btn btn-outline btn-sm">
+                    <a href="/" target="_blank" class="btn btn-outline btn-sm">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         Lihat Web
                     </a>
@@ -350,6 +352,6 @@
         </div>
     </div>
 
-    <script src="admin.js"></script>
+    <script src="/admin.js"></script>
 </body>
 </html>

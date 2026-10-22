@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         postersTableBody.innerHTML = postersData.map(poster => `
             <tr>
                 <td>
-                    <img src="${escapeHtml(poster.imageUrl)}" alt="${escapeHtml(poster.title)}" class="table-thumb" onerror="this.src='asset/img/logo-3d.png'">
+                    <img src="${escapeHtml(poster.imageUrl)}" alt="${escapeHtml(poster.title)}" class="table-thumb" onerror="this.src='/asset/img/logo-3d.png'">
                 </td>
                 <td>
                     <div class="table-item-title">${escapeHtml(poster.title)}</div>
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
         articlesTableBody.innerHTML = articlesData.map(article => `
             <tr>
                 <td>
-                    <img src="${escapeHtml(article.coverUrl)}" alt="${escapeHtml(article.title)}" class="table-thumb" onerror="this.src='asset/img/logo-3d.png'">
+                    <img src="${escapeHtml(article.coverUrl)}" alt="${escapeHtml(article.title)}" class="table-thumb" onerror="this.src='/asset/img/logo-3d.png'">
                 </td>
                 <td>
                     <div class="table-item-title">${escapeHtml(article.title)}</div>

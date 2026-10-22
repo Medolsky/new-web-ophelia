@@ -6,6 +6,7 @@ const cors = require('cors');
 const crypto = require('crypto');
 
 const app = express();
+app.disable('x-powered-by');
 const PORT = process.env.PORT || 3000;
 
 // Setup Directories
@@ -60,7 +61,7 @@ function initializeDB() {
                     id: 'poster_3',
                     title: 'Car Meet & Drift Championship',
                     description: 'Kompetisi modifikasi mobil dan adu kecepatan di Los Santos Airport.',
-                    imageUrl: 'asset/img/logo-3d.png',
+                    imageUrl: '/asset/img/logo-3d.png',
                     category: 'COMMUNITY',
                     createdAt: new Date(Date.now() - 86400000).toISOString()
                 }
@@ -71,7 +72,7 @@ function initializeDB() {
                     title: 'Pembaruan Fitur Framework v2.4 & Optimalisasi FPS Kota',
                     category: 'PATCH NOTES',
                     author: 'Developer Team',
-                    coverUrl: 'asset/img/logo-3d.png',
+                    coverUrl: '/asset/img/logo-3d.png',
                     excerpt: 'Simak rangkuman pembaharuan script custom pekerjaan, optimalisasi handling mobil, dan peningkatan kestabilan server.',
                     content: 'Warga Ophelia Roleplay yang terhormat,\n\nKami dengan bangga merilis pembaruan v2.4 yang difokuskan pada peningkatan performa dan kenyamanan bermain:\n\n1. Optimalisasi Script Core: Pengurangan lag spike dan latensi FiveM hingga 35%.\n2. Modifikasi Kendaraan: Penyeimbangan handling mobil sport, SUV dinas kepolisian, dan ambulans.\n3. Fitur Pekerjaan Baru: Penambahan variasi pekerjaan legal dan perluasan interaksi pedagang pasar.\n4. Sistem Keamanan Kota: Pengetatan integrasi Anti-Cheat dan proteksi cyber kota.\n\nSelamat menikmati petualangan roleplay yang lebih imersif dan kompetitif di Ophelia!',
                     createdAt: new Date(Date.now() - 86400000 * 3).toISOString()
@@ -81,7 +82,7 @@ function initializeDB() {
                     title: 'Panduan Menjadi Warga Baru & Aturan Roleplay Ophelia',
                     category: 'GUIDE',
                     author: 'Head Admin',
-                    coverUrl: 'asset/img/logo-kota.png',
+                    coverUrl: '/asset/img/logo-kota.png',
                     excerpt: 'Panduan lengkap seputar etika roleplay, istilah penting (FailRP, VDM, RDM), dan tata tertib hidup di kota Ophelia.',
                     content: 'Bagi seluruh pendatang baru di Ophelia Roleplay, perhatikan prinsip utama dalam menjaga kualitas cerita roleplay bersama:\n\n- Hormati Value of Life: Selalu hargai nyawa karakter Anda dalam setiap skenario kejahatan maupun kecelakaan.\n- No Random Death Match (RDM) & Vehicle Death Match (VDM): Dilarang melukai atau menabrak warga tanpa latar belakang roleplay yang jelas.\n- Menghormati Instansi: Hormati petugas kepolisian dan paramedis saat bertugas di TKP.\n\nCiptakan jalan cerita yang unik dan bangun reputasi karaktermu bersama komunitas kami!',
                     createdAt: new Date(Date.now() - 86400000 * 2).toISOString()
@@ -91,7 +92,7 @@ function initializeDB() {
                     title: 'Event Komunitas: Turnamen Underground & Pasar Malam',
                     category: 'EVENT',
                     author: 'Kreatif Team',
-                    coverUrl: 'asset/img/logo-3d.png',
+                    coverUrl: '/asset/img/logo-3d.png',
                     excerpt: 'Bersiaplah untuk festival akhir pekan dengan hadiah ratusan juta rupiah uang in-game dan gelar juara kota.',
                     content: 'Malam minggu ini Ophelia akan menggelar rangkaian event meriah:\n\n- Drag Race Championship di runway Sandy Shores.\n- Bazar Pedagang Kaki Lima di pusat kota dengan diskon makanan & merchandise khusus.\n- Konser musik live di Diamond Casino Roof.\n\nPastikan Anda mendaftarkan tim dan kendaraan terbaik Anda melalui Discord resmi Ophelia Roleplay!',
                     createdAt: new Date(Date.now() - 86400000).toISOString()
@@ -165,6 +166,17 @@ const upload = multer({
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Security Headers Middleware (Content-Security-Policy & hardening)
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://cdn.discordapp.com https://*.discordapp.com https://*.discord.com https://i.imgur.com https://images.unsplash.com https://*.supabase.co; connect-src 'self' https://servers-frontend.fivem.net https://*.cfx.re https://frontend.cfx-services.net https://*.supabase.co; media-src 'self' data: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self';");
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), browsing-topics=()');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    next();
+});
 
 // Serve Static Files with Calibrated Caching Headers
 const staticOptions = {
@@ -566,8 +578,14 @@ app.delete('/api/articles/:id', requireAuth, (req, res) => {
 
 // Start Server locally or export for serverless
 if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
-    // Fallback to index.html for client routes in local server mode
+    // Fallback for client routes: static assets that 404 should NOT serve index.html
     app.use((req, res) => {
+        if (req.path.match(/\.(png|jpe?g|webp|gif|svg|ico|js|css|woff2?|ttf|eot|json|map|txt|xml)$/i) || req.path.startsWith('/asset/') || req.path.startsWith('/uploads/')) {
+            const notFoundPath = fs.existsSync(path.join(__dirname, '404.html'))
+                ? path.join(__dirname, '404.html')
+                : path.join(__dirname, 'public', '404.html');
+            return res.status(404).sendFile(notFoundPath);
+        }
         res.sendFile(path.join(__dirname, 'index.html'));
     });
 
