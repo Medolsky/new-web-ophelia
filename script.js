@@ -635,56 +635,56 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================= */
     const MANAGEMENT_DISCORD_IDS = {
         // High Command
-        SAIKO: '',               // Founder & Server Director
-        LOPINAZ: '',             // Head Admin
+        SAIKO: '754032322784788761',              // Founder & Server Director
+        LOPINAZ: '284990856040153089',            // Head Admin
 
         // Developer
-        SAHABAT_KITA_SEMUA: '',  // Developer (Ketua)
-        RUPI_GEMBROT: '',        // Developer (Ketua)
+        SAHABAT_KITA_SEMUA: '1112497577615691869', // Developer (Ketua)
+        RUPI_GEMBROT: '390376159696912395',       // Developer (Ketua)
 
         // Cyber & Security
-        DANTE_CYBER: '',         // Cyber & Security (Ketua)
-        FARHAN: '',              // Cyber & Security (Anggota)
-        JOSH: '',                // Cyber & Security (Anggota)
+        DANTE_CYBER: '846340165949849630',        // Cyber & Security (Ketua)
+        FARHAN: '1177563844185432134',             // Cyber & Security (Anggota)
+        JOSH: '591688923030224896',               // Cyber & Security (Anggota)
 
         // Modder
-        DIMAS: '',               // Modder - Ped / Clothing
-        DAPIT_MODDER: '',        // Modder - Kendaraan / Handling
+        DIMAS: '473850254031323136',              // Modder - Ped / Clothing
+        DAPIT_MODDER: '312492291178627074',       // Modder - Kendaraan / Handling
 
         // Kreatif
-        MARSHAL: '',             // Kreatif (Anggota)
+        MARSHAL: '1047865636900053062',           // Kreatif (Anggota)
 
         // Donasi
-        DAPIT_DONASI: '',        // Donasi (Anggota)
-        LASKAR_DONASI: '',       // Donasi (Anggota)
-        ELISAPI_DONASI: '',      // Donasi (Anggota)
+        DAPIT_DONASI: '312492291178627074',       // Donasi (Anggota)
+        LASKAR_DONASI: '1119754662069940356',      // Donasi (Anggota)
+        ELISAPI_DONASI: '926755573205172254',     // Donasi (Anggota)
 
         // PJ Bocil
-        ELISAPI_PJ_BOCIL: '',    // PJ Bocil (Penanggung Jawab)
+        ELISAPI_PJ_BOCIL: '926755573205172254',   // PJ Bocil (Penanggung Jawab)
 
         // Pedagang
-        PIWPIW: '',              // Pedagang (Ketua - Zara)
-        MAWING: '',              // Pedagang (Anggota)
-        JASON: '',               // Pedagang (Anggota)
+        PIWPIW: '1161004367541964910',             // Pedagang (Ketua - Zara)
+        MAWING: '916514413551435806',             // Pedagang (Anggota)
+        JASON: '944299382398939146',              // Pedagang (Anggota)
 
         // Badside Management
-        ALAN: '',                // Badside (Badside & HT)
-        DANTE_BADSIDE: '',       // Badside (Cyber)
-        SEAN: '',                // Badside (HT)
-        PUTRA: '',               // Badside (Badside & HT)
+        ALAN: '475367595126685706',               // Badside (Badside & HT)
+        DANTE_BADSIDE: '846340165949849630',       // Badside (Cyber)
+        SEAN: '1446900555699196025',              // Badside (HT)
+        PUTRA: '1454680863269847301',             // Badside (Badside & HT)
 
         // Instansi: Polisi
-        NASAA: '',               // Polisi (Ketua / Chief)
-        NATHAN: '',              // Polisi (Anggota)
+        NASAA: '983237484236374057',              // Polisi (Ketua / Chief)
+        NATHAN: '1036237050594209902',            // Polisi (Anggota)
 
         // Instansi: Mekanik
-        REYY: '',                // Mekanik (Ketua / Head Mechanic)
-        LASKAR_MEKANIK: '',      // Mekanik (Anggota)
+        REYY: '1196333014368661514',              // Mekanik (Ketua / Head Mechanic)
+        LASKAR_MEKANIK: '1119754662069940356',     // Mekanik (Anggota)
 
         // Instansi: EMS
-        PANPAN: '',              // EMS (Ketua / Chief Medical)
-        BAGUS: '',               // EMS (Anggota)
-        NOMNOM: ''               // EMS (Anggota)
+        PANPAN: '715746033354801195',             // EMS (Ketua / Chief Medical)
+        BAGUS: '390376159696912395',              // EMS (Anggota)
+        NOMNOM: '1229337749652242503'             // EMS (Anggota)
     };
 
     function applyManagementDiscordLinks() {
@@ -719,30 +719,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Expose config to window for quick console debugging or runtime modification
     window.OPHELIA_MANAGEMENT_DISCORD = MANAGEMENT_DISCORD_IDS;
     window.reloadManagementDiscordLinks = applyManagementDiscordLinks;
-
-    // ---- Management Team Category Filter ----
-    const teamFilterBtns = document.querySelectorAll('.team-filter-btn');
-    const deptCards = document.querySelectorAll('.dept-card');
-
-    if (teamFilterBtns.length > 0 && deptCards.length > 0) {
-        teamFilterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter') || 'all';
-
-                teamFilterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                deptCards.forEach(card => {
-                    const cardCat = card.getAttribute('data-category');
-                    if (filter === 'all' || cardCat === filter) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-    }
 
     console.log('%c OPHELIA ROLEPLAY ', 'background: #B91C1C; color: white; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 4px;');
     console.log('%c Website by Ophelia Dev Team ', 'color: #A3A3A3; font-size: 12px;');
