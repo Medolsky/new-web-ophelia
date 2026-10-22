@@ -6,16 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Preloader ----
     const preloader = document.getElementById('preloader');
-    window.addEventListener('load', () => {
-        setTimeout(() => {
+    function hidePreloader() {
+        if (preloader && !preloader.classList.contains('hidden')) {
             preloader.classList.add('hidden');
-        }, 2200);
-    });
+        }
+    }
 
-    // Fallback: hide preloader after 4 seconds max
-    setTimeout(() => {
-        preloader.classList.add('hidden');
-    }, 4000);
+    if (document.readyState === 'complete') {
+        setTimeout(hidePreloader, 800);
+    } else {
+        window.addEventListener('load', () => {
+            setTimeout(hidePreloader, 1800);
+        });
+    }
+
+    // Safety fallback: hide preloader after 3.5 seconds max
+    setTimeout(hidePreloader, 3500);
 
     // ---- Cursor Glow ----
     const cursorGlow = document.getElementById('cursor-glow');
@@ -308,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 deptCards.forEach(card => {
                     const category = card.getAttribute('data-category') || '';
                     if (targetFilter === 'all' || category.split(' ').includes(targetFilter)) {
-                        card.style.display = 'flex';
+                        card.style.display = '';
                         card.classList.add('animated');
                     } else {
                         card.style.display = 'none';
@@ -626,26 +632,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMediaContent();
 
-    // ---- Team Division Filter Tabs ----
-    const teamFilterBtns = document.querySelectorAll('.team-filter-btn');
-    const deptCards = document.querySelectorAll('.dept-card');
-    if (teamFilterBtns.length > 0 && deptCards.length > 0) {
-        teamFilterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                teamFilterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
-                deptCards.forEach(card => {
-                    const cat = card.getAttribute('data-category');
-                    if (filter === 'all' || cat === filter) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-    }
 
     /* =========================================================================
        MANAGEMENT DISCORD PROFILES CONFIGURATION
