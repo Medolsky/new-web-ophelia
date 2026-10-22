@@ -106,50 +106,167 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ---- Hero Background Slideshow ----
-    const heroBg = document.getElementById('hero-bg-slideshow');
-    // Slideshow disabled when placeholder asset files are not uploaded yet
-    if (heroBg) {
-        heroBg.style.opacity = '1';
+    const heroSlides = [
+        'asset/img/bg/bg-1.png',
+        'asset/img/bg/bg-5.png',
+        'asset/img/bg/bg-7.png',
+        'asset/img/bg/bg-3.png',
+        'asset/img/bg/bg-9.png',
+        'asset/img/bg/bg-11.png',
+        'asset/img/bg/bg-2.png'
+    ];
+
+    let currentSlide = 0;
+    let slideTimer = null;
+    let isTransitioning = false;
+    let activeLayerIsA = true;
+
+    const layerA = document.getElementById('hero-slide-layer-a');
+    const layerB = document.getElementById('hero-slide-layer-b');
+    const dotsContainer = document.getElementById('hero-slide-dots');
+    const currentSpan = document.getElementById('hero-slide-current');
+    const totalSpan = document.getElementById('hero-slide-total');
+    const prevBtn = document.getElementById('hero-prev-btn');
+    const nextBtn = document.getElementById('hero-next-btn');
+
+    // Preload all hero images for instant, smooth switching
+    heroSlides.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    if (totalSpan) {
+        totalSpan.textContent = String(heroSlides.length).padStart(2, '0');
     }
 
-    // ---- Particles ----
-    const particlesContainer = document.getElementById('particles');
-    function createParticle() {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.width = (Math.random() * 3 + 1) + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
-        particle.style.animationDelay = Math.random() * 4 + 's';
-        particle.style.opacity = Math.random() * 0.6 + 0.2;
-        particlesContainer.appendChild(particle);
+    // Build dots
+    if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        heroSlides.forEach((_, idx) => {
+            const dot = document.createElement('button');
+            dot.className = `hero-slide-dot ${idx === 0 ? 'active' : ''}`;
+            dot.setAttribute('aria-label', `Foto ${idx + 1}`);
+            dot.addEventListener('click', () => {
+                if (currentSlide !== idx && !isTransitioning) {
+                    goToSlide(idx);
+                    resetAutoCycle();
+                }
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
 
-        // Remove after animation
+    // Set initial slide on layer A
+    if (layerA) {
+        layerA.style.backgroundImage = `url('${heroSlides[0]}')`;
+        layerA.classList.add('active', 'zooming');
+    }
+
+    function updateSlideUI() {
+        if (currentSpan) {
+            currentSpan.textContent = String(currentSlide + 1).padStart(2, '0');
+        }
+        if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('.hero-slide-dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentSlide);
+            });
+        }
+    }
+
+    function goToSlide(targetIndex) {
+        if (isTransitioning || !layerA || !layerB) return;
+        isTransitioning = true;
+        currentSlide = targetIndex;
+        updateSlideUI();
+
+        const incomingLayer = activeLayerIsA ? layerB : layerA;
+        const outgoingLayer = activeLayerIsA ? layerA : layerB;
+
+        // Reset incoming layer zoom & assign new background
+        incomingLayer.classList.remove('zooming');
+        incomingLayer.style.backgroundImage = `url('${heroSlides[targetIndex]}')`;
+
+        // Force reflow
+        void incomingLayer.offsetWidth;
+
+        // Crossfade: incoming layer fades in & starts zooming
+        incomingLayer.classList.add('active', 'zooming');
+        outgoingLayer.classList.remove('active');
+
+        // Toggle active layer reference
+        activeLayerIsA = !activeLayerIsA;
+
         setTimeout(() => {
-            particle.remove();
-        }, 15000);
+            outgoingLayer.classList.remove('zooming');
+            isTransitioning = false;
+        }, 1400);
     }
 
-    // Initial particles
-    for (let i = 0; i < 30; i++) {
-        setTimeout(createParticle, i * 200);
+    function nextSlide() {
+        const nextIdx = (currentSlide + 1) % heroSlides.length;
+        goToSlide(nextIdx);
     }
 
-    // Continuous particle creation
-    setInterval(createParticle, 500);
+    function prevSlide() {
+        const prevIdx = (currentSlide - 1 + heroSlides.length) % heroSlides.length;
+        goToSlide(prevIdx);
+    }
 
-    // ---- Stat Counter Animation ----
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoCycle();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoCycle();
+        });
+    }
+
+    function resetAutoCycle() {
+        if (slideTimer) clearInterval(slideTimer);
+        slideTimer = setInterval(nextSlide, 7000);
+    }
+
+    // Start auto cycle
+    resetAutoCycle();
+
+    // ---- Particles (Bounded Pool - Memory Safe) ----
+    const particlesContainer = document.getElementById('particles');
+    if (particlesContainer) {
+        const particleCount = 18;
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            const size = Math.random() * 2.5 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+            particle.style.animationDelay = (Math.random() * 8) + 's';
+            particle.style.opacity = Math.random() * 0.45 + 0.15;
+            fragment.appendChild(particle);
+        }
+        particlesContainer.appendChild(fragment);
+    }
+
+    // ---- Stat Counter Animation (Safe Fallback) ----
     const statNumbers = document.querySelectorAll('.stat-number');
     let statAnimating = false;
 
     function animateStats() {
-        if (statAnimating) return;
+        if (statAnimating || statNumbers.length === 0) return;
         statAnimating = true;
 
         statNumbers.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-target'));
-            const duration = 2000;
+            const target = parseInt(stat.getAttribute('data-target')) || 0;
+            if (target === 0) return;
+            const duration = 1500;
             const startTime = performance.now();
 
             function updateStat(currentTime) {
@@ -171,26 +288,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function resetStats() {
-        statAnimating = false;
-        statNumbers.forEach(stat => {
-            stat.textContent = '0';
-        });
-    }
-
-    // Trigger stat animation when hero is in view, reset when out
-    const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setTimeout(animateStats, 500);
-            } else {
-                resetStats();
-            }
-        });
-    }, { threshold: 0.2 });
-
     const heroSection = document.getElementById('home');
-    if (heroSection) heroObserver.observe(heroSection);
+    if (heroSection && statNumbers.length > 0) {
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(animateStats, 300);
+                }
+            });
+        }, { threshold: 0.2 });
+        heroObserver.observe(heroSection);
+    }
 
 
 
@@ -215,8 +323,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animateElements.forEach(el => scrollObserver.observe(el));
 
-    // Feature cards animation (reset on scroll away)
-    const featureCards = document.querySelectorAll('.feature-card');
+    // Feature & Bento cards animation (reset on scroll away)
+    const featureCards = document.querySelectorAll('.feature-card, .bento-card');
     const featureObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
             if (entry.isIntersecting) {
@@ -235,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
         featureObserver.observe(card);
     });
 
-    // ---- Tilt Effect on Feature Cards ----
+    // ---- Tilt Effect on Feature & Bento Cards ----
     featureCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -243,10 +351,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / centerY * -5;
-            const rotateY = (x - centerX) / centerX * 5;
+            const rotateX = (y - centerY) / centerY * -4;
+            const rotateY = (x - centerX) / centerX * 4;
 
-            card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            card.style.transform = `translateY(-6px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
         card.addEventListener('mouseleave', () => {
@@ -330,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'poster_1',
             title: 'Grand Launching Ophelia City',
             description: 'Poster resmi peresmian kota Ophelia Roleplay dengan sistem custom dan ekonomi stabil.',
-            imageUrl: 'asset/img/logo-3d.png',
+            imageUrl: 'asset/img/bg/bg-6.png',
             category: 'EVENT',
             createdAt: '2026-09-25T02:37:59.788Z'
         },
@@ -338,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'poster_2',
             title: 'Open Recruitment: Polisi & EMS',
             description: 'Pendaftaran terbuka instansi kepolisian dan medis kota Ophelia Roleplay.',
-            imageUrl: 'asset/img/logo-kota.png',
+            imageUrl: 'asset/img/bg/bg-2.png',
             category: 'RECRUITMENT',
             createdAt: '2026-09-26T02:37:59.788Z'
         },
@@ -346,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'poster_3',
             title: 'Car Meet & Drift Championship',
             description: 'Kompetisi modifikasi mobil dan adu kecepatan di Los Santos Airport.',
-            imageUrl: 'asset/img/logo-3d.png',
+            imageUrl: 'asset/img/bg/bg-1.png',
             category: 'COMMUNITY',
             createdAt: '2026-09-27T02:37:59.788Z'
         }
@@ -358,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Pembaruan Fitur Framework v2.4 & Optimalisasi FPS Kota',
             category: 'PATCH NOTES',
             author: 'Developer Team',
-            coverUrl: 'asset/img/logo-3d.png',
+            coverUrl: 'asset/img/bg/bg-8.png',
             excerpt: 'Simak rangkuman pembaharuan script custom pekerjaan, optimalisasi handling mobil, dan peningkatan kestabilan server.',
             content: 'Warga Ophelia Roleplay yang terhormat,\n\nKami dengan bangga merilis pembaruan v2.4 yang difokuskan pada peningkatan performa dan kenyamanan bermain:\n\n1. Optimalisasi Script Core: Pengurangan lag spike dan latensi FiveM hingga 35%.\n2. Modifikasi Kendaraan: Penyeimbangan handling mobil sport, SUV dinas kepolisian, dan ambulans.\n3. Fitur Pekerjaan Baru: Penambahan variasi pekerjaan legal dan perluasan interaksi pedagang pasar.\n4. Sistem Keamanan Kota: Pengetatan integrasi Anti-Cheat dan proteksi cyber kota.\n\nSelamat menikmati petualangan roleplay yang lebih imersif dan kompetitif di Ophelia!',
             createdAt: '2026-09-25T02:37:59.788Z'
@@ -368,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Panduan Menjadi Warga Baru & Aturan Roleplay Ophelia',
             category: 'GUIDE',
             author: 'Head Admin',
-            coverUrl: 'asset/img/logo-kota.png',
+            coverUrl: 'asset/img/bg/bg-4.png',
             excerpt: 'Panduan lengkap seputar etika roleplay, istilah penting (FailRP, VDM, RDM), dan tata tertib hidup di kota Ophelia.',
             content: 'Bagi seluruh pendatang baru di Ophelia Roleplay, perhatikan prinsip utama dalam menjaga kualitas cerita roleplay bersama:\n\n- Hormati Value of Life: Selalu hargai nyawa karakter Anda dalam setiap skenario kejahatan maupun kecelakaan.\n- No Random Death Match (RDM) & Vehicle Death Match (VDM): Dilarang melukai atau menabrak warga tanpa latar belakang roleplay yang jelas.\n- Menghormati Instansi: Hormati petugas kepolisian dan paramedis saat bertugas di TKP.\n\nCiptakan jalan cerita yang unik dan bangun reputasi karaktermu bersama komunitas kami!',
             createdAt: '2026-09-26T02:37:59.788Z'
@@ -378,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Event Komunitas: Turnamen Underground & Pasar Malam',
             category: 'EVENT',
             author: 'Kreatif Team',
-            coverUrl: 'asset/img/logo-3d.png',
+            coverUrl: 'asset/img/bg/bg-10.png',
             excerpt: 'Bersiaplah untuk festival akhir pekan dengan hadiah ratusan juta rupiah uang in-game dan gelar juara kota.',
             content: 'Malam minggu ini Ophelia akan menggelar rangkaian event meriah:\n\n- Drag Race Championship di runway Sandy Shores.\n- Bazar Pedagang Kaki Lima di pusat kota dengan diskon makanan & merchandise khusus.\n- Konser musik live di Diamond Casino Roof.\n\nPastikan Anda mendaftarkan tim dan kendaraan terbaik Anda melalui Discord resmi Ophelia Roleplay!',
             createdAt: '2026-09-27T02:37:59.788Z'
@@ -583,8 +691,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const livePlayerCount = document.getElementById('live-player-count');
 
     async function fetchLiveServerStatus() {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
+
         try {
-            const res = await fetch('/api/server-status');
+            const res = await fetch('/api/server-status', { signal: controller.signal });
+            clearTimeout(timeoutId);
             const data = await res.json();
 
             if (data.online) {
@@ -616,7 +728,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } catch (err) {
-            console.warn('[CFX Status Fetch Error]:', err);
+            clearTimeout(timeoutId);
+            if (err.name !== 'AbortError') {
+                console.warn('[CFX Status Fetch Error]:', err);
+            }
         }
     }
 

@@ -166,10 +166,26 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve Static Files
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname)));
-app.use('/uploads', express.static(UPLOADS_DIR));
+// Serve Static Files with Calibrated Caching Headers
+const staticOptions = {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache');
+        } else if (filePath.match(/\.(css|js|woff2?|ttf|eot)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+        } else if (filePath.match(/\.(png|jpe?g|webp|gif|svg|ico)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=2592000');
+        }
+    }
+};
+
+app.use(express.static(path.join(__dirname, 'public'), staticOptions));
+app.use(express.static(path.join(__dirname), staticOptions));
+app.use('/uploads', express.static(UPLOADS_DIR, {
+    setHeaders: (res) => {
+        res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=2592000');
+    }
+}));
 
 // Authentication Middleware
 function requireAuth(req, res, next) {
