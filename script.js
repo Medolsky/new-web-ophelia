@@ -626,6 +626,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMediaContent();
 
+    // ---- Team Division Filter Tabs ----
+    const teamFilterBtns = document.querySelectorAll('.team-filter-btn');
+    const deptCards = document.querySelectorAll('.dept-card');
+    if (teamFilterBtns.length > 0 && deptCards.length > 0) {
+        teamFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                teamFilterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                deptCards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    if (filter === 'all' || cat === filter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
     /* =========================================================================
        MANAGEMENT DISCORD PROFILES CONFIGURATION
        -------------------------------------------------------------------------

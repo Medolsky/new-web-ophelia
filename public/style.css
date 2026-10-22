@@ -1526,8 +1526,10 @@ body:hover #cursor-glow {
 .owner-avatar {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(185, 28, 28, 0.6));
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(220, 38, 38, 0.45);
+    box-shadow: 0 0 25px rgba(220, 38, 38, 0.35);
     animation: float-logo 3.5s ease-in-out infinite;
     position: relative;
     z-index: 2;
@@ -1647,6 +1649,33 @@ body:hover #cursor-glow {
     gap: 12px;
     margin-top: 18px;
     flex-wrap: wrap;
+}
+
+.owner-handle-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    background: rgba(88, 101, 242, 0.12);
+    border: 1px solid rgba(88, 101, 242, 0.32);
+    border-radius: 999px;
+    color: #C7D2FE;
+    transition: all 0.2s ease;
+}
+
+.owner-handle-badge svg {
+    color: #5865F2;
+    flex-shrink: 0;
+}
+
+.owner-handle-badge:hover {
+    background: rgba(88, 101, 242, 0.2);
+    border-color: rgba(88, 101, 242, 0.5);
+    transform: translateY(-1px);
 }
 
 .owner-discord-btn {
@@ -1877,145 +1906,235 @@ body:hover #cursor-glow {
     color: #FFFFFF;
 }
 
-/* Department Body */
+/* Department Body & Grid */
 .dept-body {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     flex: 1;
 }
 
-.dept-role-block {
+.dept-members-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
 }
 
-.role-header {
+/* Discord Member Profile Card */
+.member-discord-card {
     display: flex;
     align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
 }
 
-.role-badge {
+.member-discord-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.08), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.member-discord-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(220, 38, 38, 0.35);
+    transform: translateX(3px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: inherit;
+}
+
+.member-discord-card:hover::before {
+    opacity: 1;
+}
+
+.member-discord-card.card-lead {
+    background: rgba(185, 28, 28, 0.06);
+    border-color: rgba(185, 28, 28, 0.22);
+}
+
+.member-discord-card.card-lead::before {
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.14), transparent 80%);
+    opacity: 0.7;
+}
+
+.member-discord-card.card-lead:hover {
+    background: rgba(185, 28, 28, 0.12);
+    border-color: rgba(220, 38, 38, 0.5);
+    box-shadow: 0 4px 20px rgba(185, 28, 28, 0.25);
+}
+
+/* Avatar Box */
+.member-avatar-box {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+.member-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #111827;
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    transition: border-color 0.2s ease, transform 0.25s ease;
+}
+
+.member-discord-card:hover .member-avatar-img {
+    border-color: rgba(220, 38, 38, 0.6);
+    transform: scale(1.05);
+}
+
+.member-discord-card.card-lead .member-avatar-img {
+    border-color: rgba(220, 38, 38, 0.4);
+}
+
+.member-status-beacon {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #10B981;
+    border: 2px solid #0B0E14;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+}
+
+/* Member Info */
+.member-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: 1;
+}
+
+.member-role-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.member-role-badge {
     font-family: var(--font-display);
-    font-size: 9px;
+    font-size: 8.5px;
     font-weight: 800;
-    letter-spacing: 1.5px;
-    padding: 3px 8px;
+    letter-spacing: 1.2px;
+    padding: 2px 6px;
     border-radius: 4px;
     text-transform: uppercase;
+    line-height: 1.2;
 }
 
-.role-badge.badge-lead {
-    background: rgba(185, 28, 28, 0.2);
-    border: 1px solid rgba(185, 28, 28, 0.4);
+.member-role-badge.badge-lead {
+    background: rgba(220, 38, 38, 0.2);
+    border: 1px solid rgba(220, 38, 38, 0.45);
     color: #FCA5A5;
 }
 
-.role-badge.badge-member {
+.member-role-badge.badge-member {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #9CA3AF;
 }
 
-.role-badge.badge-spec {
-    background: rgba(59, 130, 246, 0.12);
+.member-spec-pill {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(59, 130, 246, 0.1);
     border: 1px solid rgba(59, 130, 246, 0.25);
     color: #93C5FD;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
 }
 
-/* Member Chips */
-.member-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+.member-name {
+    font-family: var(--font-heading);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: #F9FAFB;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s ease;
 }
 
-.member-chips-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+.member-discord-card:hover .member-name {
+    color: #FFFFFF;
 }
 
-.member-chip {
+.member-discord-card.card-lead .member-name {
+    color: #FEE2E2;
+}
+
+.member-discord-tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 7px 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 8px;
-    transition: all 0.25s ease;
-    text-decoration: none;
-    color: inherit;
+    gap: 4px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 10.5px;
+    color: #9CA3AF;
+    transition: color 0.2s ease;
 }
 
-.member-chip:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    text-decoration: none;
-    color: inherit;
-}
-
-.chip-discord-icon {
-    margin-left: auto;
-    color: rgba(255, 255, 255, 0.28);
-    transition: all 0.2s ease;
+.member-tag-icon {
     flex-shrink: 0;
+    color: #6B7280;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.member-chip:hover .chip-discord-icon {
+.member-discord-card:hover .member-discord-tag {
+    color: #C7D2FE;
+}
+
+.member-discord-card:hover .member-tag-icon {
     color: #5865F2;
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
 
-.member-chip.leader-chip:hover .chip-discord-icon {
-    color: #F87171;
-}
-
-.member-chip.leader-chip {
-    background: rgba(185, 28, 28, 0.1);
-    border-color: rgba(185, 28, 28, 0.25);
-}
-
-.member-chip.leader-chip:hover {
-    background: rgba(185, 28, 28, 0.18);
-    border-color: rgba(185, 28, 28, 0.4);
-}
-
-.member-chip.spec-chip {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-.chip-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--red-light);
-    box-shadow: 0 0 6px var(--red-light);
+/* Action Button */
+.member-action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6B7280;
     flex-shrink: 0;
+    transition: all 0.2s ease;
 }
 
-.chip-name {
-    font-family: var(--font-heading);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #F3F4F6;
-}
-
-.chip-meta {
-    font-family: var(--font-display);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 2px 5px;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #F87171;
+.member-discord-card:hover .member-action-btn {
+    background: rgba(88, 101, 242, 0.15);
+    border-color: rgba(88, 101, 242, 0.35);
+    color: #C7D2FE;
+    transform: scale(1.08);
 }
 
 /* Responsive updates for Team Section */
@@ -2052,8 +2171,14 @@ body:hover #cursor-glow {
         grid-template-columns: 1fr;
     }
 
-    .member-chips-grid {
-        grid-template-columns: 1fr;
+    .member-discord-card {
+        padding: 9px 10px;
+        gap: 10px;
+    }
+
+    .member-avatar-box {
+        width: 38px;
+        height: 38px;
     }
 }
 
