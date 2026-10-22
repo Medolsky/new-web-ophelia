@@ -169,7 +169,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Security Headers Middleware (Content-Security-Policy & hardening)
 app.use((req, res, next) => {
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://cdn.discordapp.com https://*.discordapp.com https://*.discord.com https://i.imgur.com https://images.unsplash.com https://*.supabase.co; connect-src 'self' https://servers-frontend.fivem.net https://*.cfx.re https://frontend.cfx-services.net https://*.supabase.co; media-src 'self' data: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self';");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self' data:; img-src 'self' data: blob: https://cdn.discordapp.com https://*.discordapp.com https://*.discord.com https://i.imgur.com https://images.unsplash.com https://*.supabase.co; connect-src 'self' https://servers-frontend.fivem.net https://*.cfx.re https://frontend.cfx-services.net https://*.supabase.co; media-src 'self' data: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self';");
     res.setHeader('X-Frame-Options', 'SAMEORIGIN');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');

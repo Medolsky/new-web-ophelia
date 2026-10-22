@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Control Panel | OPHELIA ROLEPLAY</title>
     <link rel="icon" type="image/png" href="/asset/img/logo-kota.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts.css?v=20261022_v8_sri">
     <link rel="stylesheet" href="/admin.css?v=20261022_v7_csp">
 </head>
 <body>
@@ -24,7 +22,7 @@
                 <h1 class="login-title">OPHELIA <span class="text-red">ADMIN</span></h1>
                 <p class="login-sub">Portal Manajemen Konten Poster &amp; Artikel Resmi</p>
             </div>
-            <form id="login-form" class="login-form">
+            <form id="login-form" class="login-form" method="post" action="/api/auth/login">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <div class="input-wrap">
@@ -48,12 +46,12 @@
                 </button>
             </form>
             <div class="login-footer">
-                <a href="index.html" class="back-link">&larr; Kembali ke Website Utama</a>
+                <a href="/" class="back-link">&larr; Kembali ke Website Utama</a>
             </div>
         </div>
     </div>
 
-    <!-- Admin Dashboard (Protected) -->
+    <!-- Dashboard Panel (Protected) -->
     <div id="admin-dashboard" class="dashboard-wrapper is-hidden">
         <!-- Top Navigation -->
         <header class="admin-topbar">
@@ -158,7 +156,7 @@
                             </tr>
                         </thead>
                         <tbody id="posters-table-body">
-                            <!-- Populated via admin.js -->
+                            <!-- Rows rendered by the panel script -->
                         </tbody>
                     </table>
                 </div>
@@ -190,7 +188,7 @@
                             </tr>
                         </thead>
                         <tbody id="articles-table-body">
-                            <!-- Populated via admin.js -->
+                            <!-- Rows rendered by the panel script -->
                         </tbody>
                     </table>
                 </div>
@@ -206,7 +204,7 @@
                 <h3 id="modal-poster-heading" class="modal-title">Tambah Poster Baru</h3>
                 <button class="modal-close-btn" id="modal-poster-close">&times;</button>
             </div>
-            <form id="form-poster" class="modal-body">
+            <form id="form-poster" class="modal-body" method="post">
                 <input type="hidden" id="poster-edit-id" value="">
                 
                 <div class="form-group">
@@ -269,7 +267,7 @@
                 <h3 id="modal-article-heading" class="modal-title">Tulis Artikel Baru</h3>
                 <button class="modal-close-btn" id="modal-article-close">&times;</button>
             </div>
-            <form id="form-article" class="modal-body">
+            <form id="form-article" class="modal-body" method="post">
                 <input type="hidden" id="article-edit-id" value="">
 
                 <div class="form-group">

@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .catch(() => null)
             ]);
 
-            // If API responded with an array, use it directly (even if empty [] when items were deleted in admin panel).
+            // If API responded with an array, use it directly (even if empty [] when items were deleted in the control panel).
             // Only fallback to defaults if API completely failed to respond (null) e.g. static local preview.
             const posters = Array.isArray(postersRes) ? postersRes : defaultPosters;
             const articles = Array.isArray(articlesRes) ? articlesRes : defaultArticles;
@@ -653,14 +653,14 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================================================
        MANAGEMENT DISCORD PROFILES CONFIGURATION
        -------------------------------------------------------------------------
-       Masukkan Discord User ID (angka unik) atau Discord profile/invite link.
+       Masukkan Discord ID (angka unik) atau Discord profile/invite link.
        Contoh ID: '345678901234567890' -> otomatis membuka https://discord.com/users/345678901234567890
        Jika dibiarkan kosong (''), tombol tetap memiliki fallback link atau bisa diisi nanti.
        ========================================================================= */
     const MANAGEMENT_DISCORD_IDS = {
         // High Command
         SAIKO: '754032322784788761',              // Founder & Server Director
-        LOPINAZ: '284990856040153089',            // Head Admin
+        LOPINAZ: '284990856040153089',            // Head of Staff
 
         // Developer
         RUPI_GEMBROT: '1112497577615691869',       // Developer (Ketua) - @rey2ru
@@ -716,7 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-discord-user');
             if (!key) return;
 
-            // Check if key is configured, fallback to base name (e.g. DAPIT for DAPIT_MODDER if user set DAPIT)
+            // Check if key is configured, fallback to base name (e.g. DAPIT for DAPIT_MODDER when only DAPIT is set)
             const baseName = key.split('_')[0];
             const rawVal = MANAGEMENT_DISCORD_IDS[key] || MANAGEMENT_DISCORD_IDS[baseName] || '';
             const trimmed = String(rawVal).trim();
@@ -727,7 +727,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
                 profileUrl = trimmed;
             } else if (/^\d+$/.test(trimmed)) {
-                // Discord Snowflake User ID format
+                // Discord Snowflake ID format
                 profileUrl = `https://discord.com/users/${trimmed}`;
             } else {
                 profileUrl = `https://discord.com/users/${trimmed}`;

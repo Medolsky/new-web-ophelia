@@ -1,5 +1,5 @@
 /**
- * OPHELIA ROLEPLAY - ADMIN CONTROL PANEL CLIENT SCRIPT
+ * OPHELIA ROLEPLAY - CONTROL PANEL CLIENT SCRIPT
  * Handles Authentication, CRUD operations for Posters & Articles, and UI Modals
  */
 

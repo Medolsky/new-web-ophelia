@@ -3,7 +3,6 @@ const https = require('https');
 const CFX_CODE = 'zjjmbx5';
 
 module.exports = async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Cache-Control', 's-maxage=15, stale-while-revalidate=30');
 
